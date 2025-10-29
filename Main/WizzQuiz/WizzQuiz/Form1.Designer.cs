@@ -36,7 +36,15 @@
             btnEditQuiz = new Button();
             btnAnswerQuiz = new Button();
             lblLibrary = new Label();
+            pnlCreate = new Panel();
+            panel2 = new Panel();
+            btnSave = new Button();
+            btnAddMultipleChoice = new Button();
+            btnAddIdentification = new Button();
+            label1 = new Label();
+            btnBackToLibrary1 = new Button();
             pnlLibrary.SuspendLayout();
+            pnlCreate.SuspendLayout();
             SuspendLayout();
             // 
             // btnAddQuiz
@@ -82,7 +90,7 @@
             pnlLibrary.Controls.Add(lblLibrary);
             pnlLibrary.Controls.Add(lbxQuizList);
             pnlLibrary.Controls.Add(btnViewAttempts);
-            pnlLibrary.Location = new Point(24, 6);
+            pnlLibrary.Location = new Point(22, 12);
             pnlLibrary.Name = "pnlLibrary";
             pnlLibrary.Size = new Size(734, 417);
             pnlLibrary.TabIndex = 3;
@@ -129,17 +137,93 @@
             lblLibrary.Text = "Your library";
             lblLibrary.Click += lblLibrary_Click;
             // 
+            // pnlCreate
+            // 
+            pnlCreate.Controls.Add(panel2);
+            pnlCreate.Controls.Add(btnSave);
+            pnlCreate.Controls.Add(btnAddMultipleChoice);
+            pnlCreate.Controls.Add(btnAddIdentification);
+            pnlCreate.Controls.Add(label1);
+            pnlCreate.Controls.Add(btnBackToLibrary1);
+            pnlCreate.Location = new Point(773, 12);
+            pnlCreate.Name = "pnlCreate";
+            pnlCreate.Size = new Size(734, 417);
+            pnlCreate.TabIndex = 4;
+            pnlCreate.Paint += pnlCreate_Paint;
+            // 
+            // panel2
+            // 
+            panel2.Location = new Point(34, 82);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(690, 263);
+            panel2.TabIndex = 8;
+            // 
+            // btnSave
+            // 
+            btnSave.Location = new Point(562, 351);
+            btnSave.Name = "btnSave";
+            btnSave.Size = new Size(162, 39);
+            btnSave.TabIndex = 5;
+            btnSave.Text = "Save";
+            btnSave.UseVisualStyleBackColor = true;
+            btnSave.Click += btnSave_Click;
+            // 
+            // btnAddMultipleChoice
+            // 
+            btnAddMultipleChoice.Location = new Point(297, 351);
+            btnAddMultipleChoice.Name = "btnAddMultipleChoice";
+            btnAddMultipleChoice.Size = new Size(259, 39);
+            btnAddMultipleChoice.TabIndex = 5;
+            btnAddMultipleChoice.Text = "Add Multiple Choice";
+            btnAddMultipleChoice.UseVisualStyleBackColor = true;
+            btnAddMultipleChoice.Click += btnAddMultipleChoice_Click;
+            // 
+            // btnAddIdentification
+            // 
+            btnAddIdentification.Location = new Point(34, 351);
+            btnAddIdentification.Name = "btnAddIdentification";
+            btnAddIdentification.Size = new Size(257, 39);
+            btnAddIdentification.TabIndex = 5;
+            btnAddIdentification.Text = "Add Identification";
+            btnAddIdentification.UseVisualStyleBackColor = true;
+            btnAddIdentification.Click += btnAddIdentification_Click;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI Semibold", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.Location = new Point(12, 27);
+            label1.Name = "label1";
+            label1.Size = new Size(200, 46);
+            label1.TabIndex = 7;
+            label1.Text = "Create Quiz";
+            label1.Click += label1_Click;
+            // 
+            // btnBackToLibrary1
+            // 
+            btnBackToLibrary1.Location = new Point(566, 38);
+            btnBackToLibrary1.Name = "btnBackToLibrary1";
+            btnBackToLibrary1.Size = new Size(158, 38);
+            btnBackToLibrary1.TabIndex = 4;
+            btnBackToLibrary1.Text = "Back to Library";
+            btnBackToLibrary1.UseVisualStyleBackColor = true;
+            btnBackToLibrary1.Click += btnBackToLibrary1_Click;
+            // 
             // WizzQuizForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(785, 450);
+            ClientSize = new Size(1519, 444);
+            Controls.Add(pnlCreate);
             Controls.Add(pnlLibrary);
+            ForeColor = SystemColors.ControlText;
             Name = "WizzQuizForm";
             Text = "WizzQuiz";
             Load += WizzQuizForm_Load;
             pnlLibrary.ResumeLayout(false);
             pnlLibrary.PerformLayout();
+            pnlCreate.ResumeLayout(false);
+            pnlCreate.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -153,5 +237,12 @@
         private Label lblLibrary;
         private Button btnDeleteQuiz;
         private Button btnEditQuiz;
+        private Panel pnlCreate;
+        private Label label1;
+        private Button btnBackToLibrary1;
+        private Button btnAddMultipleChoice;
+        private Button btnAddIdentification;
+        private Button btnSave;
+        private Panel panel2;
     }
 }

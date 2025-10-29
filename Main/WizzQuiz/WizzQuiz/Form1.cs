@@ -56,5 +56,35 @@ namespace WizzQuiz
         {
 
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnBackToLibrary1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pnlCreate_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAddMultipleChoice_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAddIdentification_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
