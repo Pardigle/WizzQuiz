@@ -1,6 +1,6 @@
 ﻿namespace WizzQuiz
 {
-    partial class Form1
+    partial class WizzQuizForm
     {
         /// <summary>
         ///  Required designer variable.
@@ -129,15 +129,15 @@
             lblLibrary.Text = "Your library";
             lblLibrary.Click += lblLibrary_Click;
             // 
-            // Form1
+            // WizzQuizForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(785, 450);
             Controls.Add(pnlLibrary);
-            Name = "Form1";
+            Name = "WizzQuizForm";
             Text = "WizzQuiz";
-            Load += Form1_Load;
+            Load += WizzQuizForm_Load;
             pnlLibrary.ResumeLayout(false);
             pnlLibrary.PerformLayout();
             ResumeLayout(false);

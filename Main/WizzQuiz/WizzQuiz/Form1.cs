@@ -1,13 +1,13 @@
 namespace WizzQuiz
 {
-    public partial class Form1 : Form
+    public partial class WizzQuizForm : Form
     {
-        public Form1()
+        public WizzQuizForm()
         {
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void WizzQuizForm_Load(object sender, EventArgs e)
         {
 
         }
