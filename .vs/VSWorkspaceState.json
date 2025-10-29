@@ -1,6 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Diagrams",
+    "\\Main",
+    "\\Main\\WizzQuiz",
+    "\\Main\\WizzQuiz\\WizzQuiz"
   ],
   "SelectedNode": "\\Main",
   "PreviewInSolutionExplorer": false
