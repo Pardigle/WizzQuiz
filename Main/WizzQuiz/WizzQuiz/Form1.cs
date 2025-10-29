@@ -9,7 +9,7 @@ namespace WizzQuiz
 
         private void WizzQuizForm_Load(object sender, EventArgs e)
         {
-
+            pnlLibrary.BringToFront();
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
@@ -19,7 +19,7 @@ namespace WizzQuiz
 
         private void btnAddQuiz_Click(object sender, EventArgs e)
         {
-
+            pnlCreate.BringToFront();
         }
 
         private void pnlLibrary_Paint(object sender, PaintEventArgs e)
@@ -64,7 +64,7 @@ namespace WizzQuiz
 
         private void btnBackToLibrary1_Click(object sender, EventArgs e)
         {
-
+            pnlLibrary.BringToFront();
         }
 
         private void pnlCreate_Paint(object sender, PaintEventArgs e)

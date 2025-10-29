@@ -90,7 +90,7 @@
             pnlLibrary.Controls.Add(lblLibrary);
             pnlLibrary.Controls.Add(lbxQuizList);
             pnlLibrary.Controls.Add(btnViewAttempts);
-            pnlLibrary.Location = new Point(22, 12);
+            pnlLibrary.Location = new Point(16, 15);
             pnlLibrary.Name = "pnlLibrary";
             pnlLibrary.Size = new Size(734, 417);
             pnlLibrary.TabIndex = 3;
@@ -145,7 +145,7 @@
             pnlCreate.Controls.Add(btnAddIdentification);
             pnlCreate.Controls.Add(label1);
             pnlCreate.Controls.Add(btnBackToLibrary1);
-            pnlCreate.Location = new Point(773, 12);
+            pnlCreate.Location = new Point(16, 15);
             pnlCreate.Name = "pnlCreate";
             pnlCreate.Size = new Size(734, 417);
             pnlCreate.TabIndex = 4;
@@ -213,7 +213,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1519, 444);
+            ClientSize = new Size(767, 444);
             Controls.Add(pnlCreate);
             Controls.Add(pnlLibrary);
             ForeColor = SystemColors.ControlText;
