@@ -170,6 +170,7 @@
             pnlCreateQuestions.Size = new Size(1121, 421);
             pnlCreateQuestions.TabIndex = 8;
             pnlCreateQuestions.WrapContents = false;
+            pnlCreateQuestions.Paint += pnlCreateQuestions_Paint;
             // 
             // btnSave
             // 

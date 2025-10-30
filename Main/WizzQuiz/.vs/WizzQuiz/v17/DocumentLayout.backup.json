@@ -11,12 +11,12 @@
       "RelativeMoniker": "D:0:0:{6B25E78B-36FE-40E7-B852-87150069D472}|WizzQuiz\\WizzQuiz.csproj|solutionrelative:wizzquiz\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6B25E78B-36FE-40E7-B852-87150069D472}|WizzQuiz\\WizzQuiz.csproj|c:\\users\\beaz13\\synologydrive\\school\\y3s1_files\\msys(dsa)_files\\dsa_proj\\wizzquiz\\main\\wizzquiz\\wizzquiz\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6B25E78B-36FE-40E7-B852-87150069D472}|WizzQuiz\\WizzQuiz.csproj|solutionrelative:wizzquiz\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{6B25E78B-36FE-40E7-B852-87150069D472}|WizzQuiz\\WizzQuiz.csproj|c:\\users\\beaz13\\synologydrive\\school\\y3s1_files\\msys(dsa)_files\\dsa_proj\\wizzquiz\\main\\wizzquiz\\wizzquiz\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6B25E78B-36FE-40E7-B852-87150069D472}|WizzQuiz\\WizzQuiz.csproj|solutionrelative:wizzquiz\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6B25E78B-36FE-40E7-B852-87150069D472}|WizzQuiz\\WizzQuiz.csproj|c:\\users\\beaz13\\synologydrive\\school\\y3s1_files\\msys(dsa)_files\\dsa_proj\\wizzquiz\\main\\wizzquiz\\wizzquiz\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6B25E78B-36FE-40E7-B852-87150069D472}|WizzQuiz\\WizzQuiz.csproj|solutionrelative:wizzquiz\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -48,26 +48,27 @@
               "RelativeDocumentMoniker": "WizzQuiz\\Form1.cs",
               "ToolTip": "C:\\Users\\beaZ13\\SynologyDrive\\School\\Y3S1_files\\msys(dsa)_files\\dsa_proj\\WizzQuiz\\Main\\WizzQuiz\\WizzQuiz\\Form1.cs",
               "RelativeToolTip": "WizzQuiz\\Form1.cs",
-              "ViewState": "AgIAAOIAAAAAAAAAAAAAAO8AAAA/AAAAAAAAAA==",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAkwCAAAABTAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-29T07:00:26.019Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "Form1.Designer.cs",
               "DocumentMoniker": "C:\\Users\\beaZ13\\SynologyDrive\\School\\Y3S1_files\\msys(dsa)_files\\dsa_proj\\WizzQuiz\\Main\\WizzQuiz\\WizzQuiz\\Form1.Designer.cs",
               "RelativeDocumentMoniker": "WizzQuiz\\Form1.Designer.cs",
               "ToolTip": "C:\\Users\\beaZ13\\SynologyDrive\\School\\Y3S1_files\\msys(dsa)_files\\dsa_proj\\WizzQuiz\\Main\\WizzQuiz\\WizzQuiz\\Form1.Designer.cs",
               "RelativeToolTip": "WizzQuiz\\Form1.Designer.cs",
-              "ViewState": "AgIAAB0AAAAAAAAAAAAUwK0AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABYAAAAAAAAAAAAUwBYAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-29T07:19:15.067Z"
+              "WhenOpened": "2025-10-29T07:19:15.067Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\beaZ13\\SynologyDrive\\School\\Y3S1_files\\msys(dsa)_files\\dsa_proj\\WizzQuiz\\Main\\WizzQuiz\\WizzQuiz\\Program.cs",
               "RelativeDocumentMoniker": "WizzQuiz\\Program.cs",
@@ -75,7 +76,8 @@
               "RelativeToolTip": "WizzQuiz\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-29T07:18:54.755Z"
+              "WhenOpened": "2025-10-29T07:18:54.755Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -86,7 +88,8 @@
               "ToolTip": "C:\\Users\\beaZ13\\SynologyDrive\\School\\Y3S1_files\\msys(dsa)_files\\dsa_proj\\WizzQuiz\\Main\\WizzQuiz\\WizzQuiz\\Form1.cs [Design]",
               "RelativeToolTip": "WizzQuiz\\Form1.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-28T13:13:11.726Z"
+              "WhenOpened": "2025-10-28T13:13:11.726Z",
+              "EditorCaption": " [Design]"
             }
           ]
         }

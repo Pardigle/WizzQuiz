@@ -23,6 +23,30 @@ namespace WizzQuiz
         private void WizzQuizForm_Load(object sender, EventArgs e)
         {
             pnlLibrary.BringToFront();
+
+            TableLayoutPanel pnlQuizTitleInput = new TableLayoutPanel();
+            pnlQuizTitleInput.RowCount = 1;
+            pnlQuizTitleInput.ColumnCount = 2;
+            pnlQuizTitleInput.Size = new Size(1050, 50);
+            pnlQuizTitleInput.AutoSize = false;
+            pnlQuizTitleInput.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 7F));
+            pnlQuizTitleInput.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 93F));
+            pnlQuizTitleInput.Margin = new Padding(0, 0, 0, 20);
+
+            Label lblQuizTitleInput = new Label();
+            lblQuizTitleInput.AutoSize = true;
+            lblQuizTitleInput.Text = "Title: ";
+
+            TextBox tbxQuizTitleInput = new TextBox();
+            tbxQuizTitleInput.Multiline = true;
+            tbxQuizTitleInput.WordWrap = true;
+            tbxQuizTitleInput.Dock = DockStyle.Fill;
+            tbxQuizTitleInput.ScrollBars = ScrollBars.Vertical;
+
+            pnlQuizTitleInput.Controls.Add(lblQuizTitleInput, 0, 0);
+            pnlQuizTitleInput.Controls.Add(tbxQuizTitleInput, 1, 0);
+
+            pnlCreateQuestions.Controls.Add(pnlQuizTitleInput);
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
@@ -86,7 +110,7 @@ namespace WizzQuiz
         // CODE FOR CREATE QUIZ 
 
         // TEMPLATE FOR QUIZ QUESTIONS (leaves last column empty)
-        public static TableLayoutPanel CreateQuestionLayout(int tableHeight, int questionNum)
+        public TableLayoutPanel CreateQuestionLayout(int tableHeight, int questionNum)
         {
             // Creates a new panel for each MultipleChoice question
             TableLayoutPanel pnlQuestionTemplate = new TableLayoutPanel();
@@ -103,10 +127,28 @@ namespace WizzQuiz
             pnlQuestionTemplate.Margin = new Padding(0, 0, 0, 50);
 
             // ROW 1 -- Points number entry
-            FlowLayoutPanel pnlRow1 = new FlowLayoutPanel();
-            pnlRow1.FlowDirection = FlowDirection.RightToLeft;
-            pnlRow1.AutoSize = true;
-            pnlRow1.Anchor = AnchorStyles.Right;
+            TableLayoutPanel pnlRow1 = new TableLayoutPanel();
+            pnlRow1.RowCount = 1;
+            pnlRow1.ColumnCount = 2;
+            pnlRow1.Size = new Size(1050, 50);
+            pnlRow1.AutoSize = false;
+            pnlRow1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 5F));
+            pnlRow1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 95F));
+
+            Button btnDeleteQuestion = new Button();
+            btnDeleteQuestion.Text = "×";
+            btnDeleteQuestion.BackColor = Color.Red;
+            btnDeleteQuestion.ForeColor = Color.White;
+            btnDeleteQuestion.AutoSize = true;
+
+            // Source: https://stackoverflow.com/questions/13888558/removing-dynamic-controls-from-panel
+            btnDeleteQuestion.Tag = pnlQuestionTemplate;
+            btnDeleteQuestion.Click += new EventHandler(btnDeleteQuestion_Click);
+
+            FlowLayoutPanel pnlPoints = new FlowLayoutPanel();
+            pnlPoints.FlowDirection = FlowDirection.RightToLeft;
+            pnlPoints.AutoSize = true;
+            pnlPoints.Anchor = AnchorStyles.Right;
 
             Label lblPoints = new Label();
             lblPoints.Text = "Points: ";
@@ -117,11 +159,15 @@ namespace WizzQuiz
             tbxPoints.AutoSize = true;
             tbxPoints.Minimum = 1;
 
-            pnlRow1.Controls.Add(tbxPoints);
-            pnlRow1.Controls.Add(lblPoints);
+            pnlPoints.Controls.Add(tbxPoints);
+            pnlPoints.Controls.Add(lblPoints);
+
+            pnlRow1.Controls.Add(btnDeleteQuestion);
+            pnlRow1.Controls.Add(pnlPoints);
 
             // ROW 2
             Label lblQuestion = new Label();
+            lblQuestion.Name = "lblQuestion";
             lblQuestion.Text = "Question " + questionNum.ToString() + ":";
             lblQuestion.AutoSize = true;
 
@@ -146,7 +192,21 @@ namespace WizzQuiz
             return pnlQuestionTemplate;
         }
 
-        public static TableLayoutPanel MultipleChoiceLayout(int questionNumber)
+        // FUNCTIONALITY FOR DELETE QUESTION BUTTON
+        public void btnDeleteQuestion_Click(object sender, EventArgs e)
+        {
+            Button btnDeleteQuestion = sender as Button;
+            TableLayoutPanel questionToDelete = btnDeleteQuestion.Tag as TableLayoutPanel;
+
+            if (questionToDelete != null)
+            {
+                pnlCreateQuestions.Controls.Remove(questionToDelete);
+            }
+
+            
+        }
+
+        public TableLayoutPanel MultipleChoiceLayout(int questionNumber)
         {
             TableLayoutPanel pnlMultipleChoice = CreateQuestionLayout(500, questionNumber);
 
@@ -208,12 +268,12 @@ namespace WizzQuiz
             pnlChoices.Controls.Add(tbxChoice2, 1, 1);
             pnlChoices.Controls.Add(tbxChoice3, 1, 2);
             pnlChoices.Controls.Add(tbxChoice4, 1, 3);
-            
+
             pnlMultipleChoice.Controls.Add(pnlChoices, 0, 4);
             return pnlMultipleChoice;
         }
 
-        public static TableLayoutPanel IdentificationLayout(int questionNumber)
+        public TableLayoutPanel IdentificationLayout(int questionNumber)
         {
             TableLayoutPanel pnlIdentification = CreateQuestionLayout(350, questionNumber);
 
@@ -224,7 +284,7 @@ namespace WizzQuiz
             tbxAnswer.WordWrap = true;
             tbxAnswer.Dock = DockStyle.Fill;
             tbxAnswer.ScrollBars = ScrollBars.Vertical;
-            
+
             pnlIdentification.Controls.Add(tbxAnswer, 0, 4);
             return pnlIdentification;
         }
@@ -256,5 +316,9 @@ namespace WizzQuiz
 
         }
 
+        private void pnlCreateQuestions_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
