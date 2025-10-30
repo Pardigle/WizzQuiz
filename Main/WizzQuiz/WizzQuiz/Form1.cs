@@ -104,6 +104,7 @@ namespace WizzQuiz
             tbxQuizTitleInput.WordWrap = true;
             tbxQuizTitleInput.Dock = DockStyle.Fill;
             tbxQuizTitleInput.ScrollBars = ScrollBars.Vertical;
+            tbxQuizTitleInput.Name = "tbxQuizTitleInput";
 
             pnlQuizTitleInput.Controls.Add(lblQuizTitleInput, 0, 0);
             pnlQuizTitleInput.Controls.Add(tbxQuizTitleInput, 1, 0);
@@ -156,39 +157,41 @@ namespace WizzQuiz
             lblPoints.Text = "Points: ";
             lblPoints.AutoSize = true;
 
-            NumericUpDown tbxPoints = new NumericUpDown();
-            tbxPoints.Height = 38;
-            tbxPoints.AutoSize = true;
-            tbxPoints.Minimum = 1;
+            NumericUpDown tbxPointsInput = new NumericUpDown();
+            tbxPointsInput.Height = 38;
+            tbxPointsInput.AutoSize = true;
+            tbxPointsInput.Minimum = 1;
+            tbxPointsInput.Name = "tbxPointsInput";
 
-            pnlPoints.Controls.Add(tbxPoints);
+            pnlPoints.Controls.Add(tbxPointsInput);
             pnlPoints.Controls.Add(lblPoints);
 
             pnlRow1.Controls.Add(btnDeleteQuestion);
             pnlRow1.Controls.Add(pnlPoints);
 
-            // ROW 2
+            // ROW 2 -- Question label
             Label lblQuestion = new Label();
             lblQuestion.Name = "lblQuestion";
             lblQuestion.Text = "Question " + questionNum.ToString() + ":";
             lblQuestion.AutoSize = true;
 
             // ROW 3 -- Question text entry
-            TextBox tbxQuestion = new TextBox();
-            tbxQuestion.PlaceholderText = "Definition ";
-            tbxQuestion.Multiline = true;
-            tbxQuestion.WordWrap = true;
-            tbxQuestion.Dock = DockStyle.Fill;
-            tbxQuestion.ScrollBars = ScrollBars.Vertical;
+            TextBox tbxQuestionInput = new TextBox();
+            tbxQuestionInput.PlaceholderText = "Definition ";
+            tbxQuestionInput.Multiline = true;
+            tbxQuestionInput.WordWrap = true;
+            tbxQuestionInput.Dock = DockStyle.Fill;
+            tbxQuestionInput.ScrollBars = ScrollBars.Vertical;
+            tbxQuestionInput.Name = "tbxQuestionInput";
 
-            // ROW 4
+            // ROW 4 -- Question label
             Label lblAnswer = new Label();
             lblAnswer.Text = "Answer:";
             lblAnswer.AutoSize = true;
 
             pnlQuestionTemplate.Controls.Add(pnlRow1, 0, 0);
             pnlQuestionTemplate.Controls.Add(lblQuestion, 0, 1);
-            pnlQuestionTemplate.Controls.Add(tbxQuestion, 0, 2);
+            pnlQuestionTemplate.Controls.Add(tbxQuestionInput, 0, 2);
             pnlQuestionTemplate.Controls.Add(lblAnswer, 0, 3);
 
             return pnlQuestionTemplate;
@@ -226,48 +229,52 @@ namespace WizzQuiz
 
             CheckBox chkChoice1 = new CheckBox();
             chkChoice1.Text = "";
-            TextBox tbxChoice1 = new TextBox();
-            tbxChoice1.PlaceholderText = "Choice A";
-            tbxChoice1.Multiline = true;
-            tbxChoice1.WordWrap = true;
-            tbxChoice1.Dock = DockStyle.Fill;
-            tbxChoice1.ScrollBars = ScrollBars.Vertical;
+            TextBox tbxChoice1Input = new TextBox();
+            tbxChoice1Input.PlaceholderText = "Choice A";
+            tbxChoice1Input.Multiline = true;
+            tbxChoice1Input.WordWrap = true;
+            tbxChoice1Input.Dock = DockStyle.Fill;
+            tbxChoice1Input.ScrollBars = ScrollBars.Vertical;
+            tbxChoice1Input.Name = "tbxChoice1Input";
 
             CheckBox chkChoice2 = new CheckBox();
             chkChoice2.Text = "";
-            TextBox tbxChoice2 = new TextBox();
-            tbxChoice2.PlaceholderText = "Choice B";
-            tbxChoice2.Multiline = true;
-            tbxChoice2.WordWrap = true;
-            tbxChoice2.Dock = DockStyle.Fill;
-            tbxChoice2.ScrollBars = ScrollBars.Vertical;
+            TextBox tbxChoice2Input = new TextBox();
+            tbxChoice2Input.PlaceholderText = "Choice B";
+            tbxChoice2Input.Multiline = true;
+            tbxChoice2Input.WordWrap = true;
+            tbxChoice2Input.Dock = DockStyle.Fill;
+            tbxChoice2Input.ScrollBars = ScrollBars.Vertical;
+            tbxChoice2Input.Name = "tbxChoice2Input";
 
             CheckBox chkChoice3 = new CheckBox();
             chkChoice3.Text = "";
-            TextBox tbxChoice3 = new TextBox();
-            tbxChoice3.PlaceholderText = "Choice C";
-            tbxChoice3.Multiline = true;
-            tbxChoice3.WordWrap = true;
-            tbxChoice3.Dock = DockStyle.Fill;
-            tbxChoice3.ScrollBars = ScrollBars.Vertical;
+            TextBox tbxChoice3Input = new TextBox();
+            tbxChoice3Input.PlaceholderText = "Choice C";
+            tbxChoice3Input.Multiline = true;
+            tbxChoice3Input.WordWrap = true;
+            tbxChoice3Input.Dock = DockStyle.Fill;
+            tbxChoice3Input.ScrollBars = ScrollBars.Vertical;
+            tbxChoice3Input.Name = "tbxChoice3Input";
 
             CheckBox chkChoice4 = new CheckBox();
             chkChoice4.Text = "";
-            TextBox tbxChoice4 = new TextBox();
-            tbxChoice4.PlaceholderText = "Choice D";
-            tbxChoice4.Multiline = true;
-            tbxChoice4.WordWrap = true;
-            tbxChoice4.Dock = DockStyle.Fill;
-            tbxChoice4.ScrollBars = ScrollBars.Vertical;
+            TextBox tbxChoice4Input = new TextBox();
+            tbxChoice4Input.PlaceholderText = "Choice D";
+            tbxChoice4Input.Multiline = true;
+            tbxChoice4Input.WordWrap = true;
+            tbxChoice4Input.Dock = DockStyle.Fill;
+            tbxChoice4Input.ScrollBars = ScrollBars.Vertical;
+            tbxChoice4Input.Name = "tbxChoice4Input";
 
             pnlChoices.Controls.Add(chkChoice1, 0, 0);
             pnlChoices.Controls.Add(chkChoice2, 0, 1);
             pnlChoices.Controls.Add(chkChoice3, 0, 2);
             pnlChoices.Controls.Add(chkChoice4, 0, 3);
-            pnlChoices.Controls.Add(tbxChoice1, 1, 0);
-            pnlChoices.Controls.Add(tbxChoice2, 1, 1);
-            pnlChoices.Controls.Add(tbxChoice3, 1, 2);
-            pnlChoices.Controls.Add(tbxChoice4, 1, 3);
+            pnlChoices.Controls.Add(tbxChoice1Input, 1, 0);
+            pnlChoices.Controls.Add(tbxChoice2Input, 1, 1);
+            pnlChoices.Controls.Add(tbxChoice3Input, 1, 2);
+            pnlChoices.Controls.Add(tbxChoice4Input, 1, 3);
 
             pnlMultipleChoice.Controls.Add(pnlChoices, 0, 4);
             return pnlMultipleChoice;
@@ -278,14 +285,15 @@ namespace WizzQuiz
             TableLayoutPanel pnlIdentification = CreateQuestionLayout(350, questionNumber);
 
             // ROW 5 -- Answer text entry
-            TextBox tbxAnswer = new TextBox();
-            tbxAnswer.PlaceholderText = "Term ";
-            tbxAnswer.Multiline = true;
-            tbxAnswer.WordWrap = true;
-            tbxAnswer.Dock = DockStyle.Fill;
-            tbxAnswer.ScrollBars = ScrollBars.Vertical;
+            TextBox tbxIdenAnswerInput = new TextBox();
+            tbxIdenAnswerInput.PlaceholderText = "Term ";
+            tbxIdenAnswerInput.Multiline = true;
+            tbxIdenAnswerInput.WordWrap = true;
+            tbxIdenAnswerInput.Dock = DockStyle.Fill;
+            tbxIdenAnswerInput.ScrollBars = ScrollBars.Vertical;
+            tbxIdenAnswerInput.Name = "tbxIdenAnswerInput";
 
-            pnlIdentification.Controls.Add(tbxAnswer, 0, 4);
+            pnlIdentification.Controls.Add(tbxIdenAnswerInput, 0, 4);
             return pnlIdentification;
         }
 
@@ -298,17 +306,17 @@ namespace WizzQuiz
             pnlCreateQuestions.Controls.Add(pnlMultipleChoice);
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnAddIdentification_Click(object sender, EventArgs e)
         {
             i++;
 
             TableLayoutPanel pnlIdentification = IdentificationLayout(i);
             pnlCreateQuestions.Controls.Add(pnlIdentification);
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void btnBackToLibrary1_Click(object sender, EventArgs e)
