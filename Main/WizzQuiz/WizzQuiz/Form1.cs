@@ -1,15 +1,9 @@
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections;
+using System.IO;
 using System.Windows.Forms;
-using static System.Windows.Forms.DataFormats;
-
-
+using System.Xml;
+using System.Xml.Linq;
 
 namespace WizzQuiz
 {
@@ -30,9 +24,33 @@ namespace WizzQuiz
 
         private void AddMultiple()
         {
-            pnlIdentification.Visible=false;
-            pnlMultiple.Visible=true;
+            pnlIdentification.Visible = false;
+            pnlMultiple.Visible = true;
             pnlMultiple.BringToFront();
+        }
+
+        private void AddIdentificationItem()
+        {
+            tbxIdentificationNumber.Text = Quiz.Count.ToString();
+            nudIdentificationPoints.Value = 1;
+            tbxIdentificationQuestion.Clear();
+            tbxIdentificationAnswer.Clear();
+        }
+
+        private void AddMultipleChoiceItem()
+        {
+            tbxMultipleNumber.Text = Quiz.Count.ToString();
+            nudMultiplePoints.Value = 1;
+            tbxMultipleQuestion.Clear();
+
+            tbxMultipleOption1.Clear();
+            tbxMultipleOption2.Clear();
+            tbxMultipleOption3.Clear();
+            tbxMultipleOption4.Clear();
+            cbxMultipleOption1.Checked = false;
+            cbxMultipleOption2.Checked = false;
+            cbxMultipleOption3.Checked = false;
+            cbxMultipleOption4.Checked = false;
         }
 
         public void updateQuestionList()
@@ -40,7 +58,7 @@ namespace WizzQuiz
             lbxQuestionList.Items.Clear();
             for (int i = 0; i < Quiz.Count(); i++)
             {
-                lbxQuestionList.Items.Add($"Question {(i+1).ToString()}");
+                lbxQuestionList.Items.Add($"Question {(i + 1).ToString()}");
             }
         }
         private void WizzQuizForm_Load(object sender, EventArgs e)
@@ -99,14 +117,14 @@ namespace WizzQuiz
             pnlCreate.Visible = true;
             pnlCreate.BringToFront();
         }
-        public void btnDeleteQuestion_Click(object sender, EventArgs e)
-        {
-        }
+
         private void btnAddMultipleChoice_Click(object sender, EventArgs e)
         {
             AddMultiple();
             MultipleChoice newMultipleChoice = new MultipleChoice();
+            newMultipleChoice.questionType = "MultipleChoice";
             Quiz.Add(newMultipleChoice);
+            AddMultipleChoiceItem();
             updateQuestionList();
         }
 
@@ -114,13 +132,93 @@ namespace WizzQuiz
         {
             AddIdentification();
             Identification newIdentification = new Identification();
+            newIdentification.questionType = "Identification";
             Quiz.Add(newIdentification);
+            AddIdentificationItem();
             updateQuestionList();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            if (Quiz.Count < 1)
+            {
+                MessageBox.Show("Add at least one question to be able to save.",
+                    "Empty Quiz",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
+            else
+            {
+                if (string.IsNullOrWhiteSpace(tbxQuizName.Text))
+                {
+                    MessageBox.Show("Please add a quiz title to be able to save.",
+                        "Empty Quiz Name",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
+                    return;
+                }
+                foreach (QuizItem item in Quiz)
+                {
+                    if (string.IsNullOrWhiteSpace(item.question))
+                    {
+                        MessageBox.Show("All questions must have text to be able to save.",
+                            "Empty Question",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning);
+                        return;
+                    }
+                    else if (item.points <= 0)
+                    {
+                        MessageBox.Show("All questions must have at least one point to be able to save.",
+                            "Empty Points",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning);
+                        return;
+                    }
+                    else if (item.questionType == "Identification")
+                    {
+                        Identification itemIdentification = (Identification)item;
+                        if (string.IsNullOrWhiteSpace(itemIdentification.correctAnswer))
+                        {
+                            MessageBox.Show("All answers for identification questions must have text to be able to save.",
+                                "Empty Identification Question Answer",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                            return;
+                        }
+                    }
+                    else if (item.questionType == "MultipleChoice")
+                    {
+                        MultipleChoice itemMultipleChoice = (MultipleChoice)item;
+                        if (itemMultipleChoice.optionCorrect1 == false && itemMultipleChoice.optionCorrect2 == false && itemMultipleChoice.optionCorrect3 == false && itemMultipleChoice.optionCorrect4 == false)
+                        {
+                            MessageBox.Show("All multiple choice questions must have at least 1 correct answer to be able to save.",
+                                "No Correct Answer Selected",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                            return;
+                        }
+                        else if (string.IsNullOrWhiteSpace(itemMultipleChoice.optionDesc1) || string.IsNullOrWhiteSpace(itemMultipleChoice.optionDesc2) || string.IsNullOrWhiteSpace(itemMultipleChoice.optionDesc3) || string.IsNullOrWhiteSpace(itemMultipleChoice.optionDesc4))
+                        {
+                            MessageBox.Show("All choices for multiple choice questions must have text to be able to save.",
+                                "Empty Choice in Multiple Choice Question",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                            return;
+                        }
+                    }
+                }
+            }
+            // xml stuff here
 
+            pnlMultiple.Visible = false;
+            pnlIdentification.Visible = false;
+            tbxQuizName.Clear();
+            lbxQuestionList.Items.Clear();
+            MessageBox.Show("Quiz successfully saved",
+                "Quiz Saved",
+                MessageBoxButtons.OK);
         }
 
         private void btnBackToLibrary1_Click(object sender, EventArgs e)
@@ -172,17 +270,30 @@ namespace WizzQuiz
 
         private void nudIdentificationPoints_ValueChanged(object sender, EventArgs e)
         {
-
+            int currentQuestionIndex = Convert.ToInt32(tbxIdentificationNumber.Text) - 1;
+            if (nudIdentificationPoints.Value != 0)
+            {
+                Quiz[currentQuestionIndex].points = (int)nudIdentificationPoints.Value;
+            }
         }
 
         private void tbxIdentificationQuestion_TextChanged(object sender, EventArgs e)
         {
-
+            int currentQuestionIndex = Convert.ToInt32(tbxIdentificationNumber.Text) - 1;
+            if (!string.IsNullOrWhiteSpace(tbxIdentificationQuestion.Text))
+            {
+                Quiz[currentQuestionIndex].question = tbxIdentificationQuestion.Text;
+            }
         }
 
         private void tbxIdentificationAnswer_TextChanged(object sender, EventArgs e)
         {
-
+            int currentQuestionIndex = Convert.ToInt32(tbxIdentificationNumber.Text) - 1;
+            if (!string.IsNullOrWhiteSpace(tbxIdentificationAnswer.Text))
+            {
+                Identification currentQuestion = (Identification)Quiz[currentQuestionIndex];
+                currentQuestion.correctAnswer = tbxIdentificationAnswer.Text;
+            }
         }
 
         private void tbxMultipleNumber_TextChanged(object sender, EventArgs e)
@@ -192,42 +303,192 @@ namespace WizzQuiz
 
         private void nudMultiplePoints_ValueChanged(object sender, EventArgs e)
         {
-
+            int currentQuestionIndex = Convert.ToInt32(tbxMultipleNumber.Text) - 1;
+            if (nudMultiplePoints.Value != 0)
+            {
+                Quiz[currentQuestionIndex].points = (int)nudMultiplePoints.Value;
+            }
         }
 
         private void tbxMultipleQuestion_TextChanged(object sender, EventArgs e)
         {
-
+            int currentQuestionIndex = Convert.ToInt32(tbxMultipleNumber.Text) - 1;
+            if (!string.IsNullOrWhiteSpace(tbxMultipleQuestion.Text))
+            {
+                Quiz[currentQuestionIndex].question = tbxMultipleQuestion.Text;
+            }
         }
 
         private void cbxMultipleOption1_CheckedChanged(object sender, EventArgs e)
         {
-
+            int currentQuestionIndex = Convert.ToInt32(tbxMultipleNumber.Text) - 1;
+            MultipleChoice currentQuestion = (MultipleChoice)Quiz[currentQuestionIndex];
+            if (cbxMultipleOption1.Checked)
+            {
+                currentQuestion.optionCorrect1 = true;
+            }
+            else
+            {
+                currentQuestion.optionCorrect1 = false;
+            }
         }
 
         private void cbxMultipleOption2_CheckedChanged(object sender, EventArgs e)
         {
+            int currentQuestionIndex = Convert.ToInt32(tbxMultipleNumber.Text) - 1;
+            MultipleChoice currentQuestion = (MultipleChoice)Quiz[currentQuestionIndex];
+            if (cbxMultipleOption2.Checked)
+            {
+                currentQuestion.optionCorrect2 = true;
+            }
+            else
+            {
+                currentQuestion.optionCorrect2 = false;
+            }
 
         }
 
         private void cbxMultipleOption3_CheckedChanged(object sender, EventArgs e)
         {
+            int currentQuestionIndex = Convert.ToInt32(tbxMultipleNumber.Text) - 1;
+            MultipleChoice currentQuestion = (MultipleChoice)Quiz[currentQuestionIndex];
+            if (cbxMultipleOption3.Checked)
+            {
+                currentQuestion.optionCorrect3 = true;
+            }
+            else
+            {
+                currentQuestion.optionCorrect3 = false;
+            }
+        }
 
+        private void cbxMultipleOption4_CheckedChanged(object sender, EventArgs e)
+        {
+            int currentQuestionIndex = Convert.ToInt32(tbxMultipleNumber.Text) - 1;
+            MultipleChoice currentQuestion = (MultipleChoice)Quiz[currentQuestionIndex];
+            if (cbxMultipleOption4.Checked)
+            {
+                currentQuestion.optionCorrect4 = true;
+            }
+            else
+            {
+                currentQuestion.optionCorrect4 = false;
+            }
         }
 
         private void tbxMultipleOption1_TextChanged(object sender, EventArgs e)
         {
-
+            int currentQuestionIndex = Convert.ToInt32(tbxMultipleNumber.Text) - 1;
+            if (!string.IsNullOrWhiteSpace(tbxMultipleOption1.Text))
+            {
+                MultipleChoice currentQuestion = (MultipleChoice)Quiz[currentQuestionIndex];
+                currentQuestion.optionDesc1 = tbxMultipleOption1.Text;
+            }
         }
 
         private void tbxMultipleOption2_TextChanged(object sender, EventArgs e)
         {
-
+            int currentQuestionIndex = Convert.ToInt32(tbxMultipleNumber.Text) - 1;
+            if (!string.IsNullOrWhiteSpace(tbxMultipleOption2.Text))
+            {
+                MultipleChoice currentQuestion = (MultipleChoice)Quiz[currentQuestionIndex];
+                currentQuestion.optionDesc2 = tbxMultipleOption2.Text;
+            }
         }
 
         private void tbxMultipleOption3_TextChanged(object sender, EventArgs e)
         {
+            int currentQuestionIndex = Convert.ToInt32(tbxMultipleNumber.Text) - 1;
+            if (!string.IsNullOrWhiteSpace(tbxMultipleOption3.Text))
+            {
+                MultipleChoice currentQuestion = (MultipleChoice)Quiz[currentQuestionIndex];
+                currentQuestion.optionDesc3 = tbxMultipleOption3.Text;
+            }
+        }
 
+        private void tbxMultipleOption4_TextChanged(object sender, EventArgs e)
+        {
+            int currentQuestionIndex = Convert.ToInt32(tbxMultipleNumber.Text) - 1;
+            if (!string.IsNullOrWhiteSpace(tbxMultipleOption4.Text))
+            {
+                MultipleChoice currentQuestion = (MultipleChoice)Quiz[currentQuestionIndex];
+                currentQuestion.optionDesc4 = tbxMultipleOption4.Text;
+            }
+        }
+
+        private void btnViewQuestion_Click(object sender, EventArgs e)
+        {
+            int selectedQuestionIndex = lbxQuestionList.SelectedIndex;
+
+            if (selectedQuestionIndex < 0)
+            {
+                MessageBox.Show("Please select a question.",
+                    "No Question Selected",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+            }
+            else
+            {
+                QuizItem selectedQuestion = Quiz[selectedQuestionIndex];
+
+                if (selectedQuestion.questionType == "Identification")
+                {
+                    AddIdentification();
+                    Identification selectedIdentification = (Identification)selectedQuestion;
+                    tbxIdentificationNumber.Text = (selectedQuestionIndex + 1).ToString();
+                    tbxIdentificationQuestion.Text = selectedIdentification.question;
+                    tbxIdentificationAnswer.Text = selectedIdentification.correctAnswer;
+                    nudIdentificationPoints.Value = selectedIdentification.points;
+                }
+                else if (selectedQuestion.questionType == "MultipleChoice")
+                {
+                    AddMultiple();
+                    MultipleChoice selectedMultiple = (MultipleChoice)selectedQuestion;
+                    tbxMultipleNumber.Text = (selectedQuestionIndex + 1).ToString();
+                    tbxMultipleQuestion.Text = selectedMultiple.question;
+                    nudMultiplePoints.Value = selectedMultiple.points;
+
+                    tbxMultipleOption1.Text = selectedMultiple.optionDesc1;
+                    tbxMultipleOption2.Text = selectedMultiple.optionDesc2;
+                    tbxMultipleOption3.Text = selectedMultiple.optionDesc3;
+                    tbxMultipleOption4.Text = selectedMultiple.optionDesc4;
+                    cbxMultipleOption1.Checked = selectedMultiple.optionCorrect1;
+                    cbxMultipleOption2.Checked = selectedMultiple.optionCorrect2;
+                    cbxMultipleOption3.Checked = selectedMultiple.optionCorrect3;
+                    cbxMultipleOption4.Checked = selectedMultiple.optionCorrect4;
+                }
+            }
+        }
+
+        private void btnDeleteQuestion_Click_1(object sender, EventArgs e)
+        {
+            int selectedQuestionIndex = lbxQuestionList.SelectedIndex;
+
+            if (selectedQuestionIndex < 0)
+            {
+                MessageBox.Show("Please select a question.",
+                    "No Question Selected",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+            }
+            else
+            {
+                DialogResult resultDeleteMessage = MessageBox.Show($"Are you sure you want to delete Question {selectedQuestionIndex + 1}?",
+                    "Confirm Question Deletion",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+                if (resultDeleteMessage == DialogResult.Yes)
+                {
+                    Quiz.RemoveAt(selectedQuestionIndex);
+                    updateQuestionList();
+                    pnlIdentification.Visible = false;
+                    pnlMultiple.Visible = false;
+
+                    MessageBox.Show("Question successfully deleted",
+                    "Question Deleted",
+                    MessageBoxButtons.OK);
+                }
+            }
         }
     }
 
