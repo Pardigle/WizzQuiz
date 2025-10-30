@@ -15,14 +15,14 @@ namespace WizzQuiz
             InitializeComponent();
         }
 
-        private void AddIdentification()
+        private void ViewIdentification()
         {
             pnlMultiple.Visible = false;
             pnlIdentification.Visible = true;
             pnlIdentification.BringToFront();
         }
 
-        private void AddMultiple()
+        private void ViewMultiple()
         {
             pnlIdentification.Visible = false;
             pnlMultiple.Visible = true;
@@ -53,7 +53,7 @@ namespace WizzQuiz
             cbxMultipleOption4.Checked = false;
         }
 
-        public void updateQuestionList()
+        public void UpdateQuestionList()
         {
             lbxQuestionList.Items.Clear();
             for (int i = 0; i < Quiz.Count(); i++)
@@ -120,22 +120,22 @@ namespace WizzQuiz
 
         private void btnAddMultipleChoice_Click(object sender, EventArgs e)
         {
-            AddMultiple();
+            ViewMultiple();
             MultipleChoice newMultipleChoice = new MultipleChoice();
             newMultipleChoice.questionType = "MultipleChoice";
             Quiz.Add(newMultipleChoice);
             AddMultipleChoiceItem();
-            updateQuestionList();
+            UpdateQuestionList();
         }
 
         private void btnAddIdentification_Click(object sender, EventArgs e)
         {
-            AddIdentification();
+            ViewIdentification();
             Identification newIdentification = new Identification();
             newIdentification.questionType = "Identification";
             Quiz.Add(newIdentification);
             AddIdentificationItem();
-            updateQuestionList();
+            UpdateQuestionList();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -433,7 +433,7 @@ namespace WizzQuiz
 
                 if (selectedQuestion.questionType == "Identification")
                 {
-                    AddIdentification();
+                    ViewIdentification();
                     Identification selectedIdentification = (Identification)selectedQuestion;
                     tbxIdentificationNumber.Text = (selectedQuestionIndex + 1).ToString();
                     tbxIdentificationQuestion.Text = selectedIdentification.question;
@@ -442,7 +442,7 @@ namespace WizzQuiz
                 }
                 else if (selectedQuestion.questionType == "MultipleChoice")
                 {
-                    AddMultiple();
+                    ViewMultiple();
                     MultipleChoice selectedMultiple = (MultipleChoice)selectedQuestion;
                     tbxMultipleNumber.Text = (selectedQuestionIndex + 1).ToString();
                     tbxMultipleQuestion.Text = selectedMultiple.question;
@@ -480,7 +480,7 @@ namespace WizzQuiz
                 if (resultDeleteMessage == DialogResult.Yes)
                 {
                     Quiz.RemoveAt(selectedQuestionIndex);
-                    updateQuestionList();
+                    UpdateQuestionList();
                     pnlIdentification.Visible = false;
                     pnlMultiple.Visible = false;
 

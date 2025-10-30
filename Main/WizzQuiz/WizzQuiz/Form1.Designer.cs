@@ -361,6 +361,7 @@
             tbxMultipleNumber.Name = "tbxMultipleNumber";
             tbxMultipleNumber.Size = new Size(50, 39);
             tbxMultipleNumber.TabIndex = 7;
+            tbxMultipleNumber.Enabled = false;
             tbxMultipleNumber.TextChanged += tbxMultipleNumber_TextChanged;
             // 
             // label7
@@ -457,6 +458,7 @@
             tbxIdentificationNumber.Name = "tbxIdentificationNumber";
             tbxIdentificationNumber.Size = new Size(50, 39);
             tbxIdentificationNumber.TabIndex = 1;
+            tbxIdentificationNumber.Enabled = false;
             tbxIdentificationNumber.TextChanged += tbxIdentificationNumber_TextChanged;
             // 
             // label3
