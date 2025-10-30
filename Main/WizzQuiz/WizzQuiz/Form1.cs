@@ -18,45 +18,20 @@ namespace WizzQuiz
         public WizzQuizForm()
         {
             InitializeComponent();
+
+            // When the form loads, add a blank title input to the Create Quiz screen
+            TableLayoutPanel pnlQuizTitleInput = QuizTitleLayout();
+            pnlCreateQuestions.Controls.Add(pnlQuizTitleInput);
         }
 
         private void WizzQuizForm_Load(object sender, EventArgs e)
         {
             pnlLibrary.BringToFront();
-
-            TableLayoutPanel pnlQuizTitleInput = new TableLayoutPanel();
-            pnlQuizTitleInput.RowCount = 1;
-            pnlQuizTitleInput.ColumnCount = 2;
-            pnlQuizTitleInput.Size = new Size(1050, 50);
-            pnlQuizTitleInput.AutoSize = false;
-            pnlQuizTitleInput.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 7F));
-            pnlQuizTitleInput.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 93F));
-            pnlQuizTitleInput.Margin = new Padding(0, 0, 0, 20);
-
-            Label lblQuizTitleInput = new Label();
-            lblQuizTitleInput.AutoSize = true;
-            lblQuizTitleInput.Text = "Title: ";
-
-            TextBox tbxQuizTitleInput = new TextBox();
-            tbxQuizTitleInput.Multiline = true;
-            tbxQuizTitleInput.WordWrap = true;
-            tbxQuizTitleInput.Dock = DockStyle.Fill;
-            tbxQuizTitleInput.ScrollBars = ScrollBars.Vertical;
-
-            pnlQuizTitleInput.Controls.Add(lblQuizTitleInput, 0, 0);
-            pnlQuizTitleInput.Controls.Add(tbxQuizTitleInput, 1, 0);
-
-            pnlCreateQuestions.Controls.Add(pnlQuizTitleInput);
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
         {
 
-        }
-
-        private void btnAddQuiz_Click(object sender, EventArgs e)
-        {
-            pnlCreate.BringToFront();
         }
 
         private void pnlLibrary_Paint(object sender, PaintEventArgs e)
@@ -99,15 +74,42 @@ namespace WizzQuiz
 
         }
 
-        private void btnBackToLibrary1_Click(object sender, EventArgs e)
+        private void btnAddQuiz_Click(object sender, EventArgs e)
         {
-            pnlLibrary.BringToFront();
+            pnlCreate.BringToFront();
         }
 
 
 
-
         // CODE FOR CREATE QUIZ 
+
+        // SHOWS TITLE INPUT BOX
+        public static TableLayoutPanel QuizTitleLayout() 
+        {
+            TableLayoutPanel pnlQuizTitleInput = new TableLayoutPanel();
+            pnlQuizTitleInput.RowCount = 1;
+            pnlQuizTitleInput.ColumnCount = 2;
+            pnlQuizTitleInput.Size = new Size(1050, 50);
+            pnlQuizTitleInput.AutoSize = false;
+            pnlQuizTitleInput.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 7F));
+            pnlQuizTitleInput.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 93F));
+            pnlQuizTitleInput.Margin = new Padding(0, 0, 0, 20);
+
+            Label lblQuizTitleInput = new Label();
+            lblQuizTitleInput.AutoSize = true;
+            lblQuizTitleInput.Text = "Title: ";
+
+            TextBox tbxQuizTitleInput = new TextBox();
+            tbxQuizTitleInput.Multiline = true;
+            tbxQuizTitleInput.WordWrap = true;
+            tbxQuizTitleInput.Dock = DockStyle.Fill;
+            tbxQuizTitleInput.ScrollBars = ScrollBars.Vertical;
+
+            pnlQuizTitleInput.Controls.Add(lblQuizTitleInput, 0, 0);
+            pnlQuizTitleInput.Controls.Add(tbxQuizTitleInput, 1, 0);
+
+            return pnlQuizTitleInput;
+        }
 
         // TEMPLATE FOR QUIZ QUESTIONS (leaves last column empty)
         public TableLayoutPanel CreateQuestionLayout(int tableHeight, int questionNum)
@@ -202,8 +204,6 @@ namespace WizzQuiz
             {
                 pnlCreateQuestions.Controls.Remove(questionToDelete);
             }
-
-            
         }
 
         public TableLayoutPanel MultipleChoiceLayout(int questionNumber)
@@ -298,6 +298,11 @@ namespace WizzQuiz
             pnlCreateQuestions.Controls.Add(pnlMultipleChoice);
         }
 
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void btnAddIdentification_Click(object sender, EventArgs e)
         {
             i++;
@@ -306,12 +311,12 @@ namespace WizzQuiz
             pnlCreateQuestions.Controls.Add(pnlIdentification);
         }
 
-        private void pnlCreate_Paint(object sender, PaintEventArgs e)
+        private void btnBackToLibrary1_Click(object sender, EventArgs e)
         {
-
+            pnlLibrary.BringToFront();
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
+        private void pnlCreate_Paint(object sender, PaintEventArgs e)
         {
 
         }
