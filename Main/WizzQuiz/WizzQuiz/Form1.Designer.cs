@@ -73,14 +73,14 @@
             label1 = new Label();
             btnBackToLibrary1 = new Button();
             panel1 = new Panel();
-            label11 = new Label();
-            panel2 = new Panel();
-            panel3 = new Panel();
-            listBox1 = new ListBox();
-            button1 = new Button();
-            button2 = new Button();
-            button3 = new Button();
             button4 = new Button();
+            button3 = new Button();
+            button2 = new Button();
+            button1 = new Button();
+            listBox1 = new ListBox();
+            panel3 = new Panel();
+            panel2 = new Panel();
+            label11 = new Label();
             pnlLibrary.SuspendLayout();
             pnlCreate.SuspendLayout();
             pnlMultiple.SuspendLayout();
@@ -94,9 +94,10 @@
             // 
             btnAddQuiz.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             btnAddQuiz.Font = new Font("Segoe UI", 10F);
-            btnAddQuiz.Location = new Point(900, 36);
+            btnAddQuiz.Location = new Point(1462, 58);
+            btnAddQuiz.Margin = new Padding(5, 5, 5, 5);
             btnAddQuiz.Name = "btnAddQuiz";
-            btnAddQuiz.Size = new Size(39, 38);
+            btnAddQuiz.Size = new Size(63, 61);
             btnAddQuiz.TabIndex = 0;
             btnAddQuiz.Text = "+";
             btnAddQuiz.UseVisualStyleBackColor = true;
@@ -105,9 +106,10 @@
             // btnViewAttempts
             // 
             btnViewAttempts.Font = new Font("Segoe UI", 9F);
-            btnViewAttempts.Location = new Point(630, 36);
+            btnViewAttempts.Location = new Point(1024, 58);
+            btnViewAttempts.Margin = new Padding(5, 5, 5, 5);
             btnViewAttempts.Name = "btnViewAttempts";
-            btnViewAttempts.Size = new Size(264, 38);
+            btnViewAttempts.Size = new Size(429, 61);
             btnViewAttempts.TabIndex = 1;
             btnViewAttempts.Text = "View Attempts";
             btnViewAttempts.UseVisualStyleBackColor = true;
@@ -117,10 +119,11 @@
             // 
             lbxQuizList.Font = new Font("Segoe UI", 9F);
             lbxQuizList.FormattingEnabled = true;
-            lbxQuizList.Location = new Point(25, 81);
+            lbxQuizList.Location = new Point(41, 130);
+            lbxQuizList.Margin = new Padding(5, 5, 5, 5);
             lbxQuizList.Name = "lbxQuizList";
             lbxQuizList.ScrollAlwaysVisible = true;
-            lbxQuizList.Size = new Size(914, 364);
+            lbxQuizList.Size = new Size(1483, 580);
             lbxQuizList.TabIndex = 2;
             lbxQuizList.SelectedIndexChanged += lbxQuizList_SelectedIndexChanged;
             // 
@@ -133,17 +136,19 @@
             pnlLibrary.Controls.Add(lblLibrary);
             pnlLibrary.Controls.Add(lbxQuizList);
             pnlLibrary.Controls.Add(btnViewAttempts);
-            pnlLibrary.Location = new Point(16, 15);
+            pnlLibrary.Location = new Point(26, 24);
+            pnlLibrary.Margin = new Padding(5, 5, 5, 5);
             pnlLibrary.Name = "pnlLibrary";
-            pnlLibrary.Size = new Size(948, 513);
+            pnlLibrary.Size = new Size(1540, 821);
             pnlLibrary.TabIndex = 3;
             pnlLibrary.Paint += pnlLibrary_Paint;
             // 
             // btnDeleteQuiz
             // 
-            btnDeleteQuiz.Location = new Point(25, 450);
+            btnDeleteQuiz.Location = new Point(41, 720);
+            btnDeleteQuiz.Margin = new Padding(5, 5, 5, 5);
             btnDeleteQuiz.Name = "btnDeleteQuiz";
-            btnDeleteQuiz.Size = new Size(195, 39);
+            btnDeleteQuiz.Size = new Size(317, 62);
             btnDeleteQuiz.TabIndex = 6;
             btnDeleteQuiz.Text = "Delete";
             btnDeleteQuiz.UseVisualStyleBackColor = true;
@@ -151,9 +156,10 @@
             // 
             // btnEditQuiz
             // 
-            btnEditQuiz.Location = new Point(226, 450);
+            btnEditQuiz.Location = new Point(367, 720);
+            btnEditQuiz.Margin = new Padding(5, 5, 5, 5);
             btnEditQuiz.Name = "btnEditQuiz";
-            btnEditQuiz.Size = new Size(198, 39);
+            btnEditQuiz.Size = new Size(322, 62);
             btnEditQuiz.TabIndex = 5;
             btnEditQuiz.Text = "Edit";
             btnEditQuiz.UseVisualStyleBackColor = true;
@@ -161,9 +167,10 @@
             // 
             // btnAnswerQuiz
             // 
-            btnAnswerQuiz.Location = new Point(430, 450);
+            btnAnswerQuiz.Location = new Point(699, 720);
+            btnAnswerQuiz.Margin = new Padding(5, 5, 5, 5);
             btnAnswerQuiz.Name = "btnAnswerQuiz";
-            btnAnswerQuiz.Size = new Size(509, 39);
+            btnAnswerQuiz.Size = new Size(827, 62);
             btnAnswerQuiz.TabIndex = 4;
             btnAnswerQuiz.Text = "Answer Quiz";
             btnAnswerQuiz.UseVisualStyleBackColor = true;
@@ -173,9 +180,10 @@
             // 
             lblLibrary.AutoSize = true;
             lblLibrary.Font = new Font("Segoe UI Semibold", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblLibrary.Location = new Point(9, 28);
+            lblLibrary.Location = new Point(15, 45);
+            lblLibrary.Margin = new Padding(5, 0, 5, 0);
             lblLibrary.Name = "lblLibrary";
-            lblLibrary.Size = new Size(199, 46);
+            lblLibrary.Size = new Size(311, 71);
             lblLibrary.TabIndex = 3;
             lblLibrary.Text = "Your library";
             lblLibrary.Click += lblLibrary_Click;
@@ -194,9 +202,10 @@
             pnlCreate.Controls.Add(btnAddIdentification);
             pnlCreate.Controls.Add(label1);
             pnlCreate.Controls.Add(btnBackToLibrary1);
-            pnlCreate.Location = new Point(13, 15);
+            pnlCreate.Location = new Point(21, 24);
+            pnlCreate.Margin = new Padding(5, 5, 5, 5);
             pnlCreate.Name = "pnlCreate";
-            pnlCreate.Size = new Size(948, 513);
+            pnlCreate.Size = new Size(1540, 821);
             pnlCreate.TabIndex = 4;
             pnlCreate.Visible = false;
             pnlCreate.Paint += pnlCreate_Paint;
@@ -218,35 +227,39 @@
             pnlMultiple.Controls.Add(label8);
             pnlMultiple.Controls.Add(tbxMultipleNumber);
             pnlMultiple.Controls.Add(label7);
-            pnlMultiple.Location = new Point(34, 117);
+            pnlMultiple.Location = new Point(55, 187);
+            pnlMultiple.Margin = new Padding(5, 5, 5, 5);
             pnlMultiple.Name = "pnlMultiple";
-            pnlMultiple.Size = new Size(646, 328);
+            pnlMultiple.Size = new Size(1050, 525);
             pnlMultiple.TabIndex = 6;
             pnlMultiple.Visible = false;
             pnlMultiple.Paint += pnlMultiple_Paint;
             // 
             // tbxMultipleOption4
             // 
-            tbxMultipleOption4.Location = new Point(360, 274);
+            tbxMultipleOption4.Location = new Point(585, 438);
+            tbxMultipleOption4.Margin = new Padding(5, 5, 5, 5);
             tbxMultipleOption4.Name = "tbxMultipleOption4";
-            tbxMultipleOption4.Size = new Size(254, 27);
+            tbxMultipleOption4.Size = new Size(410, 39);
             tbxMultipleOption4.TabIndex = 14;
             tbxMultipleOption4.TextChanged += tbxMultipleOption4_TextChanged;
             // 
             // tbxMultipleOption3
             // 
-            tbxMultipleOption3.Location = new Point(360, 238);
+            tbxMultipleOption3.Location = new Point(585, 381);
+            tbxMultipleOption3.Margin = new Padding(5, 5, 5, 5);
             tbxMultipleOption3.Name = "tbxMultipleOption3";
-            tbxMultipleOption3.Size = new Size(254, 27);
+            tbxMultipleOption3.Size = new Size(410, 39);
             tbxMultipleOption3.TabIndex = 7;
             tbxMultipleOption3.TextChanged += tbxMultipleOption3_TextChanged;
             // 
             // cbxMultipleOption4
             // 
             cbxMultipleOption4.AutoSize = true;
-            cbxMultipleOption4.Location = new Point(336, 280);
+            cbxMultipleOption4.Location = new Point(546, 448);
+            cbxMultipleOption4.Margin = new Padding(5, 5, 5, 5);
             cbxMultipleOption4.Name = "cbxMultipleOption4";
-            cbxMultipleOption4.Size = new Size(18, 17);
+            cbxMultipleOption4.Size = new Size(28, 27);
             cbxMultipleOption4.TabIndex = 7;
             cbxMultipleOption4.UseVisualStyleBackColor = true;
             cbxMultipleOption4.CheckedChanged += cbxMultipleOption4_CheckedChanged;
@@ -254,108 +267,120 @@
             // cbxMultipleOption3
             // 
             cbxMultipleOption3.AutoSize = true;
-            cbxMultipleOption3.Location = new Point(336, 244);
+            cbxMultipleOption3.Location = new Point(546, 390);
+            cbxMultipleOption3.Margin = new Padding(5, 5, 5, 5);
             cbxMultipleOption3.Name = "cbxMultipleOption3";
-            cbxMultipleOption3.Size = new Size(18, 17);
+            cbxMultipleOption3.Size = new Size(28, 27);
             cbxMultipleOption3.TabIndex = 13;
             cbxMultipleOption3.UseVisualStyleBackColor = true;
             cbxMultipleOption3.CheckedChanged += cbxMultipleOption3_CheckedChanged;
             // 
             // tbxMultipleOption2
             // 
-            tbxMultipleOption2.Location = new Point(44, 274);
+            tbxMultipleOption2.Location = new Point(72, 438);
+            tbxMultipleOption2.Margin = new Padding(5, 5, 5, 5);
             tbxMultipleOption2.Name = "tbxMultipleOption2";
-            tbxMultipleOption2.Size = new Size(259, 27);
+            tbxMultipleOption2.Size = new Size(418, 39);
             tbxMultipleOption2.TabIndex = 7;
             tbxMultipleOption2.TextChanged += tbxMultipleOption2_TextChanged;
             // 
             // cbxMultipleOption2
             // 
             cbxMultipleOption2.AutoSize = true;
-            cbxMultipleOption2.Location = new Point(20, 280);
+            cbxMultipleOption2.Location = new Point(32, 448);
+            cbxMultipleOption2.Margin = new Padding(5, 5, 5, 5);
             cbxMultipleOption2.Name = "cbxMultipleOption2";
-            cbxMultipleOption2.Size = new Size(18, 17);
+            cbxMultipleOption2.Size = new Size(28, 27);
             cbxMultipleOption2.TabIndex = 7;
             cbxMultipleOption2.UseVisualStyleBackColor = true;
             cbxMultipleOption2.CheckedChanged += cbxMultipleOption2_CheckedChanged;
             // 
             // tbxMultipleOption1
             // 
-            tbxMultipleOption1.Location = new Point(44, 238);
+            tbxMultipleOption1.Location = new Point(72, 381);
+            tbxMultipleOption1.Margin = new Padding(5, 5, 5, 5);
             tbxMultipleOption1.Name = "tbxMultipleOption1";
-            tbxMultipleOption1.Size = new Size(259, 27);
+            tbxMultipleOption1.Size = new Size(418, 39);
             tbxMultipleOption1.TabIndex = 7;
             tbxMultipleOption1.TextChanged += tbxMultipleOption1_TextChanged;
             // 
             // cbxMultipleOption1
             // 
             cbxMultipleOption1.AutoSize = true;
-            cbxMultipleOption1.Location = new Point(20, 244);
+            cbxMultipleOption1.Location = new Point(32, 390);
+            cbxMultipleOption1.Margin = new Padding(5, 5, 5, 5);
             cbxMultipleOption1.Name = "cbxMultipleOption1";
-            cbxMultipleOption1.Size = new Size(18, 17);
+            cbxMultipleOption1.Size = new Size(28, 27);
             cbxMultipleOption1.TabIndex = 7;
             cbxMultipleOption1.UseVisualStyleBackColor = true;
             cbxMultipleOption1.CheckedChanged += cbxMultipleOption1_CheckedChanged;
             // 
             // nudMultiplePoints
             // 
-            nudMultiplePoints.Location = new Point(575, 22);
+            nudMultiplePoints.Location = new Point(934, 35);
+            nudMultiplePoints.Margin = new Padding(5, 5, 5, 5);
             nudMultiplePoints.Name = "nudMultiplePoints";
-            nudMultiplePoints.Size = new Size(52, 27);
+            nudMultiplePoints.Size = new Size(84, 39);
             nudMultiplePoints.TabIndex = 12;
             nudMultiplePoints.ValueChanged += nudMultiplePoints_ValueChanged;
             // 
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new Point(518, 24);
+            label10.Location = new Point(842, 38);
+            label10.Margin = new Padding(5, 0, 5, 0);
             label10.Name = "label10";
-            label10.Size = new Size(51, 20);
+            label10.Size = new Size(83, 32);
             label10.TabIndex = 11;
             label10.Text = "Points:";
             // 
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(20, 210);
+            label9.Location = new Point(32, 336);
+            label9.Margin = new Padding(5, 0, 5, 0);
             label9.Name = "label9";
-            label9.Size = new Size(60, 20);
+            label9.Size = new Size(96, 32);
             label9.TabIndex = 10;
             label9.Text = "Answer:";
             // 
             // tbxMultipleQuestion
             // 
-            tbxMultipleQuestion.Location = new Point(20, 77);
+            tbxMultipleQuestion.Location = new Point(32, 123);
+            tbxMultipleQuestion.Margin = new Padding(5, 5, 5, 5);
             tbxMultipleQuestion.Multiline = true;
             tbxMultipleQuestion.Name = "tbxMultipleQuestion";
-            tbxMultipleQuestion.Size = new Size(607, 130);
+            tbxMultipleQuestion.Size = new Size(984, 206);
             tbxMultipleQuestion.TabIndex = 9;
             tbxMultipleQuestion.TextChanged += tbxMultipleQuestion_TextChanged;
             // 
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(20, 54);
+            label8.Location = new Point(32, 86);
+            label8.Margin = new Padding(5, 0, 5, 0);
             label8.Name = "label8";
-            label8.Size = new Size(71, 20);
+            label8.Size = new Size(116, 32);
             label8.TabIndex = 8;
             label8.Text = "Question:";
             // 
             // tbxMultipleNumber
             // 
             tbxMultipleNumber.Enabled = false;
-            tbxMultipleNumber.Location = new Point(92, 17);
+            tbxMultipleNumber.Location = new Point(150, 27);
+            tbxMultipleNumber.Margin = new Padding(5, 5, 5, 5);
             tbxMultipleNumber.Name = "tbxMultipleNumber";
-            tbxMultipleNumber.Size = new Size(32, 27);
+            tbxMultipleNumber.Size = new Size(50, 39);
             tbxMultipleNumber.TabIndex = 7;
             tbxMultipleNumber.TextChanged += tbxMultipleNumber_TextChanged;
             // 
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(20, 20);
+            label7.Location = new Point(32, 32);
+            label7.Margin = new Padding(5, 0, 5, 0);
             label7.Name = "label7";
-            label7.Size = new Size(66, 20);
+            label7.Size = new Size(107, 32);
             label7.TabIndex = 0;
             label7.Text = "Number:";
             // 
@@ -369,90 +394,100 @@
             pnlIdentification.Controls.Add(label4);
             pnlIdentification.Controls.Add(tbxIdentificationNumber);
             pnlIdentification.Controls.Add(label3);
-            pnlIdentification.Location = new Point(34, 118);
+            pnlIdentification.Location = new Point(55, 189);
+            pnlIdentification.Margin = new Padding(5, 5, 5, 5);
             pnlIdentification.Name = "pnlIdentification";
-            pnlIdentification.Size = new Size(646, 328);
+            pnlIdentification.Size = new Size(1050, 525);
             pnlIdentification.TabIndex = 5;
             pnlIdentification.Visible = false;
             pnlIdentification.Paint += pnlIdentification_Paint;
             // 
             // nudIdentificationPoints
             // 
-            nudIdentificationPoints.Location = new Point(575, 16);
+            nudIdentificationPoints.Location = new Point(934, 26);
+            nudIdentificationPoints.Margin = new Padding(5, 5, 5, 5);
             nudIdentificationPoints.Name = "nudIdentificationPoints";
-            nudIdentificationPoints.Size = new Size(52, 27);
+            nudIdentificationPoints.Size = new Size(84, 39);
             nudIdentificationPoints.TabIndex = 6;
             nudIdentificationPoints.ValueChanged += nudIdentificationPoints_ValueChanged;
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(518, 19);
+            label6.Location = new Point(842, 30);
+            label6.Margin = new Padding(5, 0, 5, 0);
             label6.Name = "label6";
-            label6.Size = new Size(51, 20);
+            label6.Size = new Size(83, 32);
             label6.TabIndex = 6;
             label6.Text = "Points:";
             // 
             // tbxIdentificationAnswer
             // 
-            tbxIdentificationAnswer.Location = new Point(20, 230);
+            tbxIdentificationAnswer.Location = new Point(32, 368);
+            tbxIdentificationAnswer.Margin = new Padding(5, 5, 5, 5);
             tbxIdentificationAnswer.Multiline = true;
             tbxIdentificationAnswer.Name = "tbxIdentificationAnswer";
-            tbxIdentificationAnswer.Size = new Size(607, 82);
+            tbxIdentificationAnswer.Size = new Size(984, 129);
             tbxIdentificationAnswer.TabIndex = 5;
             tbxIdentificationAnswer.TextChanged += tbxIdentificationAnswer_TextChanged;
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(20, 207);
+            label5.Location = new Point(32, 331);
+            label5.Margin = new Padding(5, 0, 5, 0);
             label5.Name = "label5";
-            label5.Size = new Size(60, 20);
+            label5.Size = new Size(96, 32);
             label5.TabIndex = 4;
             label5.Text = "Answer:";
             // 
             // tbxIdentificationQuestion
             // 
-            tbxIdentificationQuestion.Location = new Point(20, 74);
+            tbxIdentificationQuestion.Location = new Point(32, 118);
+            tbxIdentificationQuestion.Margin = new Padding(5, 5, 5, 5);
             tbxIdentificationQuestion.Multiline = true;
             tbxIdentificationQuestion.Name = "tbxIdentificationQuestion";
-            tbxIdentificationQuestion.Size = new Size(607, 130);
+            tbxIdentificationQuestion.Size = new Size(984, 206);
             tbxIdentificationQuestion.TabIndex = 3;
             tbxIdentificationQuestion.TextChanged += tbxIdentificationQuestion_TextChanged;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(20, 51);
+            label4.Location = new Point(32, 82);
+            label4.Margin = new Padding(5, 0, 5, 0);
             label4.Name = "label4";
-            label4.Size = new Size(71, 20);
+            label4.Size = new Size(116, 32);
             label4.TabIndex = 2;
             label4.Text = "Question:";
             // 
             // tbxIdentificationNumber
             // 
             tbxIdentificationNumber.Enabled = false;
-            tbxIdentificationNumber.Location = new Point(92, 16);
+            tbxIdentificationNumber.Location = new Point(150, 26);
+            tbxIdentificationNumber.Margin = new Padding(5, 5, 5, 5);
             tbxIdentificationNumber.Name = "tbxIdentificationNumber";
-            tbxIdentificationNumber.Size = new Size(32, 27);
+            tbxIdentificationNumber.Size = new Size(50, 39);
             tbxIdentificationNumber.TabIndex = 1;
             tbxIdentificationNumber.TextChanged += tbxIdentificationNumber_TextChanged;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(20, 20);
+            label3.Location = new Point(32, 32);
+            label3.Margin = new Padding(5, 0, 5, 0);
             label3.Name = "label3";
-            label3.Size = new Size(66, 20);
+            label3.Size = new Size(107, 32);
             label3.TabIndex = 0;
             label3.Text = "Number:";
             label3.Click += label3_Click;
             // 
             // btnViewQuestion
             // 
-            btnViewQuestion.Location = new Point(816, 415);
+            btnViewQuestion.Location = new Point(1326, 664);
+            btnViewQuestion.Margin = new Padding(5, 5, 5, 5);
             btnViewQuestion.Name = "btnViewQuestion";
-            btnViewQuestion.Size = new Size(116, 29);
+            btnViewQuestion.Size = new Size(188, 46);
             btnViewQuestion.TabIndex = 13;
             btnViewQuestion.Text = "View";
             btnViewQuestion.UseVisualStyleBackColor = true;
@@ -460,9 +495,10 @@
             // 
             // btnDeleteQuestion
             // 
-            btnDeleteQuestion.Location = new Point(685, 415);
+            btnDeleteQuestion.Location = new Point(1113, 664);
+            btnDeleteQuestion.Margin = new Padding(5, 5, 5, 5);
             btnDeleteQuestion.Name = "btnDeleteQuestion";
-            btnDeleteQuestion.Size = new Size(125, 29);
+            btnDeleteQuestion.Size = new Size(203, 46);
             btnDeleteQuestion.TabIndex = 12;
             btnDeleteQuestion.Text = "Delete";
             btnDeleteQuestion.UseVisualStyleBackColor = true;
@@ -471,35 +507,39 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(34, 90);
+            label2.Location = new Point(55, 144);
+            label2.Margin = new Padding(5, 0, 5, 0);
             label2.Name = "label2";
-            label2.Size = new Size(86, 20);
+            label2.Size = new Size(139, 32);
             label2.TabIndex = 11;
             label2.Text = "Quiz Name:";
             label2.Click += label2_Click;
             // 
             // tbxQuizName
             // 
-            tbxQuizName.Location = new Point(126, 87);
+            tbxQuizName.Location = new Point(205, 139);
+            tbxQuizName.Margin = new Padding(5, 5, 5, 5);
             tbxQuizName.Name = "tbxQuizName";
-            tbxQuizName.Size = new Size(553, 27);
+            tbxQuizName.Size = new Size(896, 39);
             tbxQuizName.TabIndex = 10;
             // 
             // lbxQuestionList
             // 
             lbxQuestionList.FormattingEnabled = true;
-            lbxQuestionList.Location = new Point(685, 87);
+            lbxQuestionList.Location = new Point(1113, 139);
+            lbxQuestionList.Margin = new Padding(5, 5, 5, 5);
             lbxQuestionList.Name = "lbxQuestionList";
             lbxQuestionList.ScrollAlwaysVisible = true;
-            lbxQuestionList.Size = new Size(247, 324);
+            lbxQuestionList.Size = new Size(399, 516);
             lbxQuestionList.TabIndex = 9;
             lbxQuestionList.SelectedIndexChanged += lbxQuestionList_SelectedIndexChanged;
             // 
             // btnSave
             // 
-            btnSave.Location = new Point(685, 450);
+            btnSave.Location = new Point(1113, 720);
+            btnSave.Margin = new Padding(5, 5, 5, 5);
             btnSave.Name = "btnSave";
-            btnSave.Size = new Size(247, 39);
+            btnSave.Size = new Size(401, 62);
             btnSave.TabIndex = 5;
             btnSave.Text = "Save";
             btnSave.UseVisualStyleBackColor = true;
@@ -507,9 +547,10 @@
             // 
             // btnAddMultipleChoice
             // 
-            btnAddMultipleChoice.Location = new Point(351, 450);
+            btnAddMultipleChoice.Location = new Point(570, 720);
+            btnAddMultipleChoice.Margin = new Padding(5, 5, 5, 5);
             btnAddMultipleChoice.Name = "btnAddMultipleChoice";
-            btnAddMultipleChoice.Size = new Size(329, 39);
+            btnAddMultipleChoice.Size = new Size(535, 62);
             btnAddMultipleChoice.TabIndex = 5;
             btnAddMultipleChoice.Text = "Add Multiple Choice Item";
             btnAddMultipleChoice.UseVisualStyleBackColor = true;
@@ -517,9 +558,10 @@
             // 
             // btnAddIdentification
             // 
-            btnAddIdentification.Location = new Point(34, 450);
+            btnAddIdentification.Location = new Point(55, 720);
+            btnAddIdentification.Margin = new Padding(5, 5, 5, 5);
             btnAddIdentification.Name = "btnAddIdentification";
-            btnAddIdentification.Size = new Size(311, 39);
+            btnAddIdentification.Size = new Size(505, 62);
             btnAddIdentification.TabIndex = 5;
             btnAddIdentification.Text = "Add Identification Item";
             btnAddIdentification.UseVisualStyleBackColor = true;
@@ -529,18 +571,20 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI Semibold", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(12, 27);
+            label1.Location = new Point(20, 43);
+            label1.Margin = new Padding(5, 0, 5, 0);
             label1.Name = "label1";
-            label1.Size = new Size(200, 46);
+            label1.Size = new Size(311, 71);
             label1.TabIndex = 7;
             label1.Text = "Create Quiz";
             label1.Click += label1_Click;
             // 
             // btnBackToLibrary1
             // 
-            btnBackToLibrary1.Location = new Point(774, 39);
+            btnBackToLibrary1.Location = new Point(1258, 62);
+            btnBackToLibrary1.Margin = new Padding(5, 5, 5, 5);
             btnBackToLibrary1.Name = "btnBackToLibrary1";
-            btnBackToLibrary1.Size = new Size(158, 38);
+            btnBackToLibrary1.Size = new Size(257, 61);
             btnBackToLibrary1.TabIndex = 4;
             btnBackToLibrary1.Text = "Back to Library";
             btnBackToLibrary1.UseVisualStyleBackColor = true;
@@ -556,89 +600,99 @@
             panel1.Controls.Add(panel3);
             panel1.Controls.Add(panel2);
             panel1.Controls.Add(label11);
-            panel1.Location = new Point(970, 15);
+            panel1.Location = new Point(1576, 24);
+            panel1.Margin = new Padding(5, 5, 5, 5);
             panel1.Name = "panel1";
-            panel1.Size = new Size(948, 513);
+            panel1.Size = new Size(1540, 821);
             panel1.TabIndex = 5;
+            // 
+            // button4
+            // 
+            button4.Location = new Point(1110, 723);
+            button4.Margin = new Padding(5, 5, 5, 5);
+            button4.Name = "button4";
+            button4.Size = new Size(398, 59);
+            button4.TabIndex = 7;
+            button4.Text = "button4";
+            button4.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            button3.Location = new Point(580, 723);
+            button3.Margin = new Padding(5, 5, 5, 5);
+            button3.Name = "button3";
+            button3.Size = new Size(520, 59);
+            button3.TabIndex = 6;
+            button3.Text = "button3";
+            button3.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            button2.Location = new Point(42, 720);
+            button2.Margin = new Padding(5, 5, 5, 5);
+            button2.Name = "button2";
+            button2.Size = new Size(528, 62);
+            button2.TabIndex = 5;
+            button2.Text = "button2";
+            button2.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(1110, 672);
+            button1.Margin = new Padding(5, 5, 5, 5);
+            button1.Name = "button1";
+            button1.Size = new Size(398, 46);
+            button1.TabIndex = 4;
+            button1.Text = "button1";
+            button1.UseVisualStyleBackColor = true;
+            // 
+            // listBox1
+            // 
+            listBox1.FormattingEnabled = true;
+            listBox1.Location = new Point(1110, 144);
+            listBox1.Margin = new Padding(5, 5, 5, 5);
+            listBox1.Name = "listBox1";
+            listBox1.Size = new Size(396, 516);
+            listBox1.TabIndex = 3;
+            // 
+            // panel3
+            // 
+            panel3.Location = new Point(42, 144);
+            panel3.Margin = new Padding(5, 5, 5, 5);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(1058, 251);
+            panel3.TabIndex = 2;
+            // 
+            // panel2
+            // 
+            panel2.Location = new Point(42, 405);
+            panel2.Margin = new Padding(5, 5, 5, 5);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(1058, 309);
+            panel2.TabIndex = 1;
             // 
             // label11
             // 
             label11.AutoSize = true;
             label11.Font = new Font("Segoe UI Semibold", 20F, FontStyle.Bold);
-            label11.Location = new Point(12, 28);
+            label11.Location = new Point(20, 45);
+            label11.Margin = new Padding(5, 0, 5, 0);
             label11.Name = "label11";
-            label11.Size = new Size(215, 46);
+            label11.Size = new Size(338, 72);
             label11.TabIndex = 0;
             label11.Text = "Answer Quiz";
             label11.Click += label11_Click;
             // 
-            // panel2
-            // 
-            panel2.Location = new Point(26, 253);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(651, 193);
-            panel2.TabIndex = 1;
-            // 
-            // panel3
-            // 
-            panel3.Location = new Point(26, 90);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(651, 157);
-            panel3.TabIndex = 2;
-            // 
-            // listBox1
-            // 
-            listBox1.FormattingEnabled = true;
-            listBox1.Location = new Point(683, 90);
-            listBox1.Name = "listBox1";
-            listBox1.Size = new Size(245, 324);
-            listBox1.TabIndex = 3;
-            // 
-            // button1
-            // 
-            button1.Location = new Point(683, 420);
-            button1.Name = "button1";
-            button1.Size = new Size(245, 29);
-            button1.TabIndex = 4;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            button2.Location = new Point(26, 450);
-            button2.Name = "button2";
-            button2.Size = new Size(325, 39);
-            button2.TabIndex = 5;
-            button2.Text = "button2";
-            button2.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            button3.Location = new Point(357, 452);
-            button3.Name = "button3";
-            button3.Size = new Size(320, 37);
-            button3.TabIndex = 6;
-            button3.Text = "button3";
-            button3.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            button4.Location = new Point(683, 452);
-            button4.Name = "button4";
-            button4.Size = new Size(245, 37);
-            button4.TabIndex = 7;
-            button4.Text = "button4";
-            button4.UseVisualStyleBackColor = true;
-            // 
             // WizzQuizForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1924, 540);
+            ClientSize = new Size(2564, 864);
             Controls.Add(panel1);
             Controls.Add(pnlCreate);
             Controls.Add(pnlLibrary);
             ForeColor = SystemColors.ControlText;
+            Margin = new Padding(5, 5, 5, 5);
             Name = "WizzQuizForm";
             Text = "WizzQuiz";
             Load += WizzQuizForm_Load;
