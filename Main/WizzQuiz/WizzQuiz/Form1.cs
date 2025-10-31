@@ -12,8 +12,11 @@ namespace WizzQuiz
     public partial class WizzQuizForm : Form
     {
         List<QuizItem> Quiz = new List<QuizItem>();
-        // String path = "C:/Users/beaZ13/SynologyDrive/School/Y3S1_files/msys(dsa)_files/dsa_proj/WizzQuiz/Main/WizzQuiz/WizzQuiz/Quizzes.xml";
-        String path = "C:/Users/Mikey/Source/Repos/WizzQuiz/Main/WizzQuiz/WizzQuiz/Quizzes.xml";
+        String path = "C:/Users/beaZ13/SynologyDrive/School/Y3S1_files/msys(dsa)_files/dsa_proj/WizzQuiz/Main/WizzQuiz/WizzQuiz/Quizzes.xml";
+        // String path = "C:/Users/Mikey/Source/Repos/WizzQuiz/Main/WizzQuiz/WizzQuiz/Quizzes.xml";
+
+        bool editState = false; // checks whether user is currently editing a quiz
+
         public WizzQuizForm()
         {
             InitializeComponent();
@@ -113,6 +116,7 @@ namespace WizzQuiz
         private void btnEditQuiz_Click(object sender, EventArgs e)
         {
             int selectedQuizIndex = lbxQuizList.SelectedIndex;
+            editState = true;
 
             if (selectedQuizIndex < 0)
             {
@@ -123,6 +127,51 @@ namespace WizzQuiz
             }
             else
             {
+                pnlLibrary.Visible = false;
+                pnlCreate.Visible = true;
+                pnlCreate.BringToFront();
+
+                lbxQuestionList.Items.Clear();
+                Quiz.Clear();
+
+                XmlDocument doc = new();
+                doc.Load(path);
+                XmlElement rootNode = doc.DocumentElement;
+
+                XmlElement selectedQuiz = (XmlElement)rootNode.ChildNodes[selectedQuizIndex];
+                
+                string quizName = selectedQuiz.GetAttribute("QuizName");
+                tbxQuizName.Text = quizName;
+
+                foreach (XmlElement item in selectedQuiz.ChildNodes)
+                { 
+                    string questionType = item.GetAttribute("QuestionType");
+                    int points = Convert.ToInt32(item.GetAttribute("Points"));
+                    string question = item.GetAttribute("Question");
+
+                    if (questionType == "Identification")
+                    {
+                        string answer = item.GetAttribute("CorrectAnswer");
+
+                        Identification identificationItem = new Identification(question, points, questionType, answer);
+                        Quiz.Add(identificationItem);
+                    }
+                    else if (questionType == "MultipleChoice")
+                    {
+                        string choiceDesc1 = item.GetAttribute("ChoiceDesc1");
+                        string choiceDesc2 = item.GetAttribute("ChoiceDesc2");
+                        string choiceDesc3 = item.GetAttribute("ChoiceDesc3");
+                        string choiceDesc4 = item.GetAttribute("ChoiceDesc4");
+                        bool choiceCorrect1 = Convert.ToBoolean(item.GetAttribute("ChoiceCorrect1"));
+                        bool choiceCorrect2 = Convert.ToBoolean(item.GetAttribute("ChoiceCorrect2"));
+                        bool choiceCorrect3 = Convert.ToBoolean(item.GetAttribute("ChoiceCorrect3"));
+                        bool choiceCorrect4 = Convert.ToBoolean(item.GetAttribute("ChoiceCorrect4"));
+
+                        MultipleChoice multiplechoiceItem = new MultipleChoice(question, points, questionType, choiceDesc1, choiceDesc2, choiceDesc3, choiceDesc4, choiceCorrect1, choiceCorrect2, choiceCorrect3, choiceCorrect4);
+                        Quiz.Add(multiplechoiceItem);
+                    }
+                }
+                UpdateQuestionList();
             }
         }
 
@@ -334,7 +383,21 @@ namespace WizzQuiz
                 quiz.AppendChild(newQuizItem);
             }
 
-            rootNode.AppendChild(quiz);
+            if (editState == false)
+            {
+                rootNode.AppendChild(quiz);
+            }
+            else
+            {
+                // If the user is editing a quiz, overwrite the previous one's xml with the edits
+                int selectedQuizIndex = lbxQuizList.SelectedIndex;
+                XmlElement quizToEdit = (XmlElement)rootNode.ChildNodes[selectedQuizIndex];
+
+                rootNode.ReplaceChild(quiz, quizToEdit);
+                editState = false;
+            }
+               
+
             doc.Save(path);
             UpdateQuizList();
 
@@ -349,9 +412,19 @@ namespace WizzQuiz
 
         private void btnBackToLibrary1_Click(object sender, EventArgs e)
         {
-            pnlMultiple.Visible = false;
-            pnlLibrary.Visible = true;
-            pnlLibrary.BringToFront();
+            if (editState == true)
+            {
+                MessageBox.Show("Save your edits to the Quiz first before returning to Library.",
+                "Unsaved Changes Detected",
+                MessageBoxButtons.OK);
+            }
+            else 
+            {
+                pnlMultiple.Visible = false;
+                pnlLibrary.Visible = true;
+                pnlLibrary.BringToFront();
+            }
+                
         }
 
         private void pnlCreate_Paint(object sender, PaintEventArgs e)
