@@ -12,8 +12,12 @@ namespace WizzQuiz
     public partial class WizzQuizForm : Form
     {
         List<QuizItem> Quiz = new List<QuizItem>();
-        String path = "C:/Users/beaZ13/SynologyDrive/School/Y3S1_files/msys(dsa)_files/dsa_proj/WizzQuiz/Main/WizzQuiz/WizzQuiz/Quizzes.xml";
-        // String path = "C:/Users/Mikey/Source/Repos/WizzQuiz/Main/WizzQuiz/WizzQuiz/Quizzes.xml";
+        List<QuizItem> QuizAttempt = new List<QuizItem>();
+        String QuizAnsweredName = "";
+        int currentAttemptIndex = 0;
+        //String path = "C:/Users/beaZ13/SynologyDrive/School/Y3S1_files/msys(dsa)_files/dsa_proj/WizzQuiz/Main/WizzQuiz/WizzQuiz/Quizzes.xml";
+        String path = "C:/Users/Mikey/Source/Repos/WizzQuiz/Main/WizzQuiz/WizzQuiz/Quizzes.xml";
+        String pathAttempts = "C:/Users/Mikey/Source/Repos/WizzQuiz/Main/WizzQuiz/WizzQuiz/Attempts.xml";
 
         bool editState = false; // checks whether user is currently editing a quiz
 
@@ -82,6 +86,59 @@ namespace WizzQuiz
                 quizNumber++;
             }
         }
+        public void ViewQuestionIndex(int index)
+        {
+            if (index >= 0)
+            {
+                QuizItem indexedItem = QuizAttempt[index];
+                tbxAnswerQuestionNumber.Text = $"Question {(index + 1).ToString()}.";
+                tbxAnswerQuestion.Text = $"{indexedItem.question}";
+                tbxAnswerQuestionPoints.Text = $"({indexedItem.points.ToString()} points)";
+
+                if (index == 0)
+                {
+                    btnAnswerPrevious.Visible = false;
+                }
+                else
+                {
+                    btnAnswerPrevious.Visible = true;
+                }
+                if (index == QuizAttempt.Count - 1)
+                {
+                    btnAnswerNext.Visible = false;
+                }
+                else
+                {
+                    btnAnswerNext.Visible = true;
+                }
+
+                if (indexedItem.questionType == "MultipleChoice")
+                {
+                    pnlAnswerIdentification.Visible = false;
+                    pnlAnswerMultiple.Visible = true;
+                    pnlAnswerMultiple.BringToFront();
+                    AnswerMultipleChoice multipleChoiceItem = (AnswerMultipleChoice)indexedItem;
+
+                    cbxAnswerChoice1.Text = multipleChoiceItem.optionDesc1;
+                    cbxAnswerChoice2.Text = multipleChoiceItem.optionDesc2;
+                    cbxAnswerChoice3.Text = multipleChoiceItem.optionDesc3;
+                    cbxAnswerChoice4.Text = multipleChoiceItem.optionDesc4;
+
+                    cbxAnswerChoice1.Checked = multipleChoiceItem.optionSelected1;
+                    cbxAnswerChoice2.Checked = multipleChoiceItem.optionSelected2;
+                    cbxAnswerChoice3.Checked = multipleChoiceItem.optionSelected3;
+                    cbxAnswerChoice4.Checked = multipleChoiceItem.optionSelected4;
+                }
+                else
+                {
+                    pnlAnswerMultiple.Visible = false;
+                    pnlAnswerIdentification.Visible = true;
+                    pnlAnswerIdentification.BringToFront();
+                    AnswerIdentification identificationItem = (AnswerIdentification)indexedItem;
+                    tbxAnswerIdentification.Text = identificationItem.inputtedAnswer;
+                }
+            }
+        }
         private void WizzQuizForm_Load(object sender, EventArgs e)
         {
             UpdateQuizList();
@@ -110,7 +167,69 @@ namespace WizzQuiz
 
         private void btnAnswerQuiz_Click(object sender, EventArgs e)
         {
+            int selectedQuizIndex = lbxQuizList.SelectedIndex;
+            currentAttemptIndex = 0;
 
+            if (selectedQuizIndex < 0)
+            {
+                MessageBox.Show("Please select a quiz.",
+                    "No Quiz Selected",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+            }
+            else
+            {
+                pnlLibrary.Visible = false;
+                pnlAnswer.Visible = true;
+
+                pnlAnswer.BringToFront();
+                lbxAnswerQuestionList.Items.Clear();
+                QuizAttempt.Clear();
+
+                XmlDocument doc = new();
+                doc.Load(path);
+                XmlElement rootNode = doc.DocumentElement;
+
+                XmlElement selectedQuiz = (XmlElement)rootNode.ChildNodes[selectedQuizIndex];
+
+                string quizName = selectedQuiz.GetAttribute("QuizName");
+                QuizAnsweredName = quizName;
+                tbxAnswerQuizName.Text = quizName;
+                int questionNumber = 1;
+
+                foreach (XmlElement item in selectedQuiz.ChildNodes)
+                {
+                    string questionType = item.GetAttribute("QuestionType");
+                    int points = Convert.ToInt32(item.GetAttribute("Points"));
+                    string question = item.GetAttribute("Question");
+
+                    if (questionType == "Identification")
+                    {
+                        string answer = item.GetAttribute("CorrectAnswer");
+
+                        AnswerIdentification identificationItem = new AnswerIdentification(question, points, questionType, answer);
+                        QuizAttempt.Add(identificationItem);
+                    }
+                    else if (questionType == "MultipleChoice")
+                    {
+                        string choiceDesc1 = item.GetAttribute("ChoiceDesc1");
+                        string choiceDesc2 = item.GetAttribute("ChoiceDesc2");
+                        string choiceDesc3 = item.GetAttribute("ChoiceDesc3");
+                        string choiceDesc4 = item.GetAttribute("ChoiceDesc4");
+                        bool choiceCorrect1 = Convert.ToBoolean(item.GetAttribute("ChoiceCorrect1"));
+                        bool choiceCorrect2 = Convert.ToBoolean(item.GetAttribute("ChoiceCorrect2"));
+                        bool choiceCorrect3 = Convert.ToBoolean(item.GetAttribute("ChoiceCorrect3"));
+                        bool choiceCorrect4 = Convert.ToBoolean(item.GetAttribute("ChoiceCorrect4"));
+
+                        AnswerMultipleChoice multiplechoiceItem = new AnswerMultipleChoice(question, points, questionType, choiceDesc1, choiceDesc2, choiceDesc3, choiceDesc4, choiceCorrect1, choiceCorrect2, choiceCorrect3, choiceCorrect4);
+                        QuizAttempt.Add(multiplechoiceItem);
+                    }
+
+                    lbxAnswerQuestionList.Items.Add($"Question {questionNumber}");
+                    questionNumber++;
+                }
+                ViewQuestionIndex(currentAttemptIndex);
+            }
         }
 
         private void btnEditQuiz_Click(object sender, EventArgs e)
@@ -129,8 +248,9 @@ namespace WizzQuiz
             {
                 pnlLibrary.Visible = false;
                 pnlCreate.Visible = true;
-                pnlCreate.BringToFront();
 
+                pnlCreate.BringToFront();
+                lblCreate.Text = "Edit Quiz";
                 lbxQuestionList.Items.Clear();
                 Quiz.Clear();
 
@@ -139,12 +259,12 @@ namespace WizzQuiz
                 XmlElement rootNode = doc.DocumentElement;
 
                 XmlElement selectedQuiz = (XmlElement)rootNode.ChildNodes[selectedQuizIndex];
-                
+
                 string quizName = selectedQuiz.GetAttribute("QuizName");
                 tbxQuizName.Text = quizName;
 
                 foreach (XmlElement item in selectedQuiz.ChildNodes)
-                { 
+                {
                     string questionType = item.GetAttribute("QuestionType");
                     int points = Convert.ToInt32(item.GetAttribute("Points"));
                     string question = item.GetAttribute("Question");
@@ -217,7 +337,7 @@ namespace WizzQuiz
 
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void lblCreate_Click(object sender, EventArgs e)
         {
 
         }
@@ -227,6 +347,7 @@ namespace WizzQuiz
             pnlLibrary.Visible = false;
             pnlCreate.Visible = true;
             pnlCreate.BringToFront();
+            lblCreate.Text = "Create Quiz";
             Quiz.Clear();
         }
 
@@ -397,7 +518,7 @@ namespace WizzQuiz
                 rootNode.ReplaceChild(quiz, quizToEdit);
                 editState = false;
             }
-               
+
 
             doc.Save(path);
             UpdateQuizList();
@@ -419,13 +540,13 @@ namespace WizzQuiz
                 "Unsaved Changes Detected",
                 MessageBoxButtons.OK);
             }
-            else 
+            else
             {
                 pnlMultiple.Visible = false;
                 pnlLibrary.Visible = true;
                 pnlLibrary.BringToFront();
             }
-                
+
         }
 
         private void pnlCreate_Paint(object sender, PaintEventArgs e)
@@ -652,6 +773,7 @@ namespace WizzQuiz
                     tbxMultipleOption2.Text = selectedMultiple.optionDesc2;
                     tbxMultipleOption3.Text = selectedMultiple.optionDesc3;
                     tbxMultipleOption4.Text = selectedMultiple.optionDesc4;
+
                     cbxMultipleOption1.Checked = selectedMultiple.optionCorrect1;
                     cbxMultipleOption2.Checked = selectedMultiple.optionCorrect2;
                     cbxMultipleOption3.Checked = selectedMultiple.optionCorrect3;
@@ -691,7 +813,293 @@ namespace WizzQuiz
             }
         }
 
-        private void label11_Click(object sender, EventArgs e)
+        private void lblCreate1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbxAnswerQuestionList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAnswerQuestionJumpTo_Click(object sender, EventArgs e)
+        {
+            int selectedQuestionIndex = lbxAnswerQuestionList.SelectedIndex;
+
+            if (selectedQuestionIndex < 0)
+            {
+                MessageBox.Show("Please select a question.","No Question Selected", MessageBoxButtons.OK,MessageBoxIcon.Warning);
+            } else
+            {
+                int selectedIndex = lbxAnswerQuestionList.SelectedIndex;
+                ViewQuestionIndex(selectedIndex);
+                currentAttemptIndex = selectedIndex;
+            }
+        }
+
+        private void btnAnswerSubmit_Click(object sender, EventArgs e)
+        {
+            bool validSubmission = true;
+            foreach (QuizItem attemptItem in QuizAttempt)
+            {
+                if (attemptItem.questionType == "MultipleChoice")
+                {
+                    AnswerMultipleChoice multipleItem = (AnswerMultipleChoice)attemptItem;
+                    if (!(multipleItem.optionSelected1 || multipleItem.optionSelected2 || multipleItem.optionSelected3 || multipleItem.optionSelected4))
+                    {
+                        validSubmission = false;
+                    }
+                } 
+                else
+                {
+                    AnswerIdentification identificationItem = (AnswerIdentification)attemptItem;
+                    if (string.IsNullOrEmpty(identificationItem.inputtedAnswer))
+                    {
+                        validSubmission = false;
+                    }
+                }
+            }
+            if (validSubmission)
+            {
+                // XML Stuff
+                XmlDocument doc = new();
+                doc.Load(pathAttempts);
+                XmlElement rootNode = doc.DocumentElement;
+
+                //Create Attempt Element
+                XmlElement attempt = doc.CreateElement("Attempt");
+                XmlAttribute quizName = doc.CreateAttribute("QuizName");
+                quizName.Value = QuizAnsweredName;
+                attempt.SetAttributeNode(quizName);
+
+                foreach (QuizItem item in QuizAttempt)
+                {
+                    XmlElement attemptItem = doc.CreateElement("AttemptItem");
+                    XmlAttribute question = doc.CreateAttribute("Question");
+                    question.Value = item.question;
+                    XmlAttribute points = doc.CreateAttribute("Points");
+                    points.Value = item.points.ToString();
+                    XmlAttribute questionType = doc.CreateAttribute("QuestionType");
+                    questionType.Value = item.questionType;
+                    attemptItem.SetAttributeNode(question);
+                    attemptItem.SetAttributeNode(points);
+                    attemptItem.SetAttributeNode(questionType);
+                    if (item.questionType == "MultipleChoice")
+                    {
+                        AnswerMultipleChoice multipleChoiceItem = (AnswerMultipleChoice)item;
+                        XmlAttribute choiceDesc1 = doc.CreateAttribute("ChoiceDesc1");
+                        XmlAttribute choiceDesc2 = doc.CreateAttribute("ChoiceDesc2");
+                        XmlAttribute choiceDesc3 = doc.CreateAttribute("ChoiceDesc3");
+                        XmlAttribute choiceDesc4 = doc.CreateAttribute("ChoiceDesc4");
+                        XmlAttribute choiceCorrect1 = doc.CreateAttribute("ChoiceCorrect1");
+                        XmlAttribute choiceCorrect2 = doc.CreateAttribute("ChoiceCorrect2");
+                        XmlAttribute choiceCorrect3 = doc.CreateAttribute("ChoiceCorrect3");
+                        XmlAttribute choiceCorrect4 = doc.CreateAttribute("ChoiceCorrect4");
+                        XmlAttribute choiceSelected1 = doc.CreateAttribute("ChoiceSelected1");
+                        XmlAttribute choiceSelected2 = doc.CreateAttribute("ChoiceSelected2");
+                        XmlAttribute choiceSelected3 = doc.CreateAttribute("ChoiceSelected3");
+                        XmlAttribute choiceSelected4 = doc.CreateAttribute("ChoiceSelected4");
+                        choiceDesc1.Value = multipleChoiceItem.optionDesc1;
+                        choiceDesc2.Value = multipleChoiceItem.optionDesc2;
+                        choiceDesc3.Value = multipleChoiceItem.optionDesc3;
+                        choiceDesc4.Value = multipleChoiceItem.optionDesc4;
+                        choiceCorrect1.Value = multipleChoiceItem.optionCorrect1.ToString();
+                        choiceCorrect2.Value = multipleChoiceItem.optionCorrect2.ToString();
+                        choiceCorrect3.Value = multipleChoiceItem.optionCorrect3.ToString();
+                        choiceCorrect4.Value = multipleChoiceItem.optionCorrect4.ToString();
+                        choiceSelected1.Value = multipleChoiceItem.optionSelected1.ToString();
+                        choiceSelected2.Value = multipleChoiceItem.optionSelected2.ToString();
+                        choiceSelected3.Value = multipleChoiceItem.optionSelected3.ToString();
+                        choiceSelected4.Value = multipleChoiceItem.optionSelected4.ToString();
+                        attemptItem.SetAttributeNode(choiceDesc1);
+                        attemptItem.SetAttributeNode(choiceDesc2);
+                        attemptItem.SetAttributeNode(choiceDesc3);
+                        attemptItem.SetAttributeNode(choiceDesc4);
+                        attemptItem.SetAttributeNode(choiceCorrect1);
+                        attemptItem.SetAttributeNode(choiceCorrect2);
+                        attemptItem.SetAttributeNode(choiceCorrect3);
+                        attemptItem.SetAttributeNode(choiceCorrect4);
+                    }
+                    else
+                    {
+                        AnswerIdentification identificationItem = (AnswerIdentification)item;
+                        XmlAttribute correctAnswer = doc.CreateAttribute("CorrectAnswer");
+                        XmlAttribute inputtedAnswer = doc.CreateAttribute("InputtedAnswer");
+                        correctAnswer.Value = identificationItem.correctAnswer;
+                        inputtedAnswer.Value = identificationItem.inputtedAnswer;
+                        attemptItem.SetAttributeNode(correctAnswer);
+                        attemptItem.SetAttributeNode(inputtedAnswer);
+                    }
+                    attempt.AppendChild(attemptItem);
+                }
+                rootNode.AppendChild(attempt);
+                doc.Save(pathAttempts);
+
+                QuizAttempt.Clear();
+                tbxAnswerQuizName.Clear();
+                tbxAnswerQuestion.Clear();
+                tbxAnswerQuestionNumber.Clear();
+                tbxAnswerQuestionPoints.Clear();
+                tbxAnswerIdentification.Clear();
+                lbxAnswerQuestionList.Items.Clear();
+                pnlAnswer.Visible = false;
+                pnlLibrary.Visible = true;
+            }
+            else
+            {
+                MessageBox.Show("Provide an answer to all questions.", "Missing Answers.", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void btnAnswerNext_Click(object sender, EventArgs e)
+        {
+            if (currentAttemptIndex < QuizAttempt.Count())
+            {
+                currentAttemptIndex++;
+                ViewQuestionIndex(currentAttemptIndex);
+            }
+        }
+
+        private void btnAnswerPrevious_Click(object sender, EventArgs e)
+        {
+            if (currentAttemptIndex > 0)
+            {
+                currentAttemptIndex--;
+                ViewQuestionIndex(currentAttemptIndex);
+            }
+        }
+
+        private void lblAnswerQuizName_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblAnswerQuestion_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tbxAnswerQuestionNumber_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tbxAnswerQuestionPoints_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tbxAnswerQuestion_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pnlAnswerQuestion_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void pnlAnswerIdentification_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void pnlAnswerMultiple_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void cbxAnswerChoice1_CheckedChanged(object sender, EventArgs e)
+        {
+            QuizItem attemptItem = QuizAttempt[currentAttemptIndex];
+            if (attemptItem.questionType == "MultipleChoice")
+            {
+                AnswerMultipleChoice currentQuestion = (AnswerMultipleChoice)attemptItem;
+                if (cbxAnswerChoice1.Checked)
+                {
+                    currentQuestion.optionSelected1 = true;
+                }
+                else
+                {
+                    currentQuestion.optionSelected1 = false;
+                }
+            }
+
+        }
+
+        private void cbxAnswerChoice2_CheckedChanged(object sender, EventArgs e)
+        {
+            QuizItem attemptItem = QuizAttempt[currentAttemptIndex];
+            if (attemptItem.questionType == "MultipleChoice")
+            {
+                AnswerMultipleChoice currentQuestion = (AnswerMultipleChoice)attemptItem;
+                if (cbxAnswerChoice2.Checked)
+                {
+                    currentQuestion.optionSelected2 = true;
+                }
+                else
+                {
+                    currentQuestion.optionSelected2 = false;
+                }
+            }
+        }
+
+        private void cbxAnswerChoice3_CheckedChanged(object sender, EventArgs e)
+        {
+            QuizItem attemptItem = QuizAttempt[currentAttemptIndex];
+            if (attemptItem.questionType == "MultipleChoice")
+            {
+                AnswerMultipleChoice currentQuestion = (AnswerMultipleChoice)attemptItem;
+                if (cbxAnswerChoice3.Checked)
+                {
+                    currentQuestion.optionSelected3 = true;
+                }
+                else
+                {
+                    currentQuestion.optionSelected3 = false;
+                }
+            }
+        }
+        private void cbxAnswerChoice4_CheckedChanged(object sender, EventArgs e)
+        {
+            QuizItem attemptItem = QuizAttempt[currentAttemptIndex];
+            if (attemptItem.questionType == "MultipleChoice")
+            {
+                AnswerMultipleChoice currentQuestion = (AnswerMultipleChoice)attemptItem;
+                if (cbxAnswerChoice4.Checked)
+                {
+                    currentQuestion.optionSelected4 = true;
+                }
+                else
+                {
+                    currentQuestion.optionSelected4 = false;
+                }
+            }
+        }
+
+        private void tbxAnswerIdentification_TextChanged(object sender, EventArgs e)
+        {
+            if (-1 > currentAttemptIndex && currentAttemptIndex > QuizAttempt.Count())
+            {
+                QuizItem attemptItem = QuizAttempt[currentAttemptIndex];
+                if (currentAttemptIndex < QuizAttempt.Count() && attemptItem.questionType == "Identification")
+                {
+                    AnswerIdentification currentQuestion = (AnswerIdentification)attemptItem;
+                    if (!string.IsNullOrWhiteSpace(tbxAnswerIdentification.Text))
+                    {
+                        currentQuestion.inputtedAnswer = tbxAnswerIdentification.Text;
+                    }
+                }
+            }
+        }
+
+        private void pnlAnswer_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void tbxAnswerQuizName_TextChanged(object sender, EventArgs e)
         {
 
         }
@@ -727,24 +1135,52 @@ namespace WizzQuiz
         public bool optionCorrect3 = false;
         public bool optionCorrect4 = false;
         public MultipleChoice() {}
-        public MultipleChoice(String question, int points, String questionType, String optionDesc1, 
-            String optionDesc2, String optionDesc3, String optionDesc4, bool optionCorrect1, 
-            bool optionCorrect2, bool optionCorrect3, bool optionCorrect4)
+        public MultipleChoice(String question, int points, String questionType, String optionDesc1, String optionDesc2, String optionDesc3, String optionDesc4, bool optionCorrect1, bool optionCorrect2, bool optionCorrect3, bool optionCorrect4)
         {
             this.question = question;
             this.points = points;
             this.questionType = questionType;
-
             this.optionDesc1 = optionDesc1;
-            this.optionCorrect1 = optionCorrect1;
-
             this.optionDesc2 = optionDesc2;
-            this.optionCorrect2 = optionCorrect2;
-
             this.optionDesc3 = optionDesc3;
-            this.optionCorrect3 = optionCorrect3;
-
             this.optionDesc4 = optionDesc4;
+            this.optionCorrect1 = optionCorrect1;
+            this.optionCorrect2 = optionCorrect2;
+            this.optionCorrect3 = optionCorrect3;
+            this.optionCorrect4 = optionCorrect4;
+        }
+    }
+    public class AnswerIdentification : Identification
+    {
+        public String inputtedAnswer = "";
+        public AnswerIdentification() {}
+        public AnswerIdentification(String question, int points, String questionType, String correctAnswer)
+        {
+            this.question = question;
+            this.points = points;
+            this.questionType = questionType;
+            this.correctAnswer = correctAnswer;
+        }
+    }
+    public class AnswerMultipleChoice : MultipleChoice
+    {
+        public bool optionSelected1 = false;
+        public bool optionSelected2 = false;
+        public bool optionSelected3 = false;
+        public bool optionSelected4 = false;
+        public AnswerMultipleChoice() {}
+        public AnswerMultipleChoice(String question, int points, String questionType, String optionDesc1, String optionDesc2, String optionDesc3, String optionDesc4, bool optionCorrect1, bool optionCorrect2, bool optionCorrect3, bool optionCorrect4)
+        {
+            this.question = question;
+            this.points = points;
+            this.questionType = questionType;
+            this.optionDesc1 = optionDesc1;
+            this.optionDesc2 = optionDesc2;
+            this.optionDesc3 = optionDesc3;
+            this.optionDesc4 = optionDesc4;
+            this.optionCorrect1 = optionCorrect1;
+            this.optionCorrect2 = optionCorrect2;
+            this.optionCorrect3 = optionCorrect3;
             this.optionCorrect4 = optionCorrect4;
         }
     }
