@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.IO;
+using System.Reflection.Metadata;
 using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Linq;
@@ -10,6 +11,7 @@ namespace WizzQuiz
     public partial class WizzQuizForm : Form
     {
         List<QuizItem> Quiz = new List<QuizItem>();
+        String path = "C:/Users/Mikey/Source/Repos/WizzQuiz/Main/WizzQuiz/WizzQuiz/Quizzes.xml";
         public WizzQuizForm()
         {
             InitializeComponent();
@@ -61,8 +63,22 @@ namespace WizzQuiz
                 lbxQuestionList.Items.Add($"Question {(i + 1).ToString()}");
             }
         }
+
+        public void UpdateQuizList()
+        {
+            XmlDocument doc = new();
+            doc.Load(path);
+            XmlElement rootNode = doc.DocumentElement;
+            int quizNumber = 1;
+            lbxQuizList.Items.Clear();
+            foreach (XmlElement quiz in rootNode.ChildNodes)
+            {
+                lbxQuizList.Items.Add($"{quizNumber.ToString()}: " + quiz.GetAttribute("QuizName"));
+            }
+        }
         private void WizzQuizForm_Load(object sender, EventArgs e)
         {
+            UpdateQuizList();
             pnlLibrary.BringToFront();
         }
 
@@ -210,7 +226,71 @@ namespace WizzQuiz
                     }
                 }
             }
-            // xml stuff here
+
+            XmlDocument doc = new();
+            doc.Load(path);
+            XmlElement rootNode = doc.DocumentElement;
+
+            //Create Quiz Element
+            XmlElement quiz = doc.CreateElement("Quiz");
+            XmlAttribute quizName = doc.CreateAttribute("QuizName");
+            quizName.Value = tbxQuizName.Text;
+            quiz.SetAttributeNode(quizName);
+
+            //Create QuizItems
+            foreach (QuizItem quizItem in Quiz)
+            {
+                XmlElement newQuizItem = doc.CreateElement("QuizItem");
+                XmlAttribute newQuizQuestion = doc.CreateAttribute("Question");
+                XmlAttribute newQuizPoints = doc.CreateAttribute("Points");
+                XmlAttribute newQuizQuestionType = doc.CreateAttribute("QuestionType");
+                newQuizQuestion.Value = quizItem.question;
+                newQuizPoints.Value = quizItem.points.ToString();
+                newQuizQuestionType.Value = quizItem.questionType;
+                newQuizItem.SetAttributeNode(newQuizQuestion);
+                newQuizItem.SetAttributeNode(newQuizPoints);
+                newQuizItem.SetAttributeNode(newQuizQuestionType);
+                if (quizItem.questionType == "MultipleChoice")
+                {
+                    MultipleChoice multipleChoiceItem = (MultipleChoice)quizItem;
+                    XmlAttribute choiceDesc1 = doc.CreateAttribute("ChoiceDesc1");
+                    XmlAttribute choiceDesc2 = doc.CreateAttribute("ChoiceDesc2");
+                    XmlAttribute choiceDesc3 = doc.CreateAttribute("ChoiceDesc3");
+                    XmlAttribute choiceDesc4 = doc.CreateAttribute("ChoiceDesc4");
+                    XmlAttribute choiceCorrect1 = doc.CreateAttribute("ChoiceCorrect1");
+                    XmlAttribute choiceCorrect2 = doc.CreateAttribute("ChoiceCorrect2");
+                    XmlAttribute choiceCorrect3 = doc.CreateAttribute("ChoiceCorrect3");
+                    XmlAttribute choiceCorrect4 = doc.CreateAttribute("ChoiceCorrect4");
+                    choiceDesc1.Value = multipleChoiceItem.optionDesc1;
+                    choiceDesc2.Value = multipleChoiceItem.optionDesc2;
+                    choiceDesc3.Value = multipleChoiceItem.optionDesc3;
+                    choiceDesc4.Value = multipleChoiceItem.optionDesc4;
+                    choiceCorrect1.Value = multipleChoiceItem.optionCorrect1.ToString();
+                    choiceCorrect2.Value = multipleChoiceItem.optionCorrect2.ToString();
+                    choiceCorrect3.Value = multipleChoiceItem.optionCorrect3.ToString();
+                    choiceCorrect4.Value = multipleChoiceItem.optionCorrect4.ToString();
+                    newQuizItem.SetAttributeNode(choiceDesc1);
+                    newQuizItem.SetAttributeNode(choiceDesc2);
+                    newQuizItem.SetAttributeNode(choiceDesc3);
+                    newQuizItem.SetAttributeNode(choiceDesc4);
+                    newQuizItem.SetAttributeNode(choiceCorrect1);
+                    newQuizItem.SetAttributeNode(choiceCorrect2);
+                    newQuizItem.SetAttributeNode(choiceCorrect3);
+                    newQuizItem.SetAttributeNode(choiceCorrect4);
+                }
+                else
+                {
+                    Identification identificationItem = (Identification)quizItem;
+                    XmlAttribute correctAnswer = doc.CreateAttribute("CorrectAnswer");
+                    correctAnswer.Value = identificationItem.correctAnswer;
+                    newQuizItem.SetAttributeNode(correctAnswer);
+                }
+                quiz.AppendChild(newQuizItem);
+            }
+
+            rootNode.AppendChild(quiz);
+            doc.Save(path);
+            UpdateQuizList();
 
             pnlMultiple.Visible = false;
             pnlIdentification.Visible = false;
@@ -489,6 +569,11 @@ namespace WizzQuiz
                     MessageBoxButtons.OK);
                 }
             }
+        }
+
+        private void label11_Click(object sender, EventArgs e)
+        {
+
         }
     }
 

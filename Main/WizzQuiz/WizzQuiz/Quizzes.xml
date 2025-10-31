@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<QuizList>
+  <Quiz QuizName="Quiz About Cats 1">
+    <QuizItem Question="How many paws do cats have?" Points="2" QuestionType="MultipleChoice" ChoiceDesc1="2" ChoiceDesc2="3" ChoiceDesc3="4" ChoiceDesc4="5" ChoiceCorrect1="False" ChoiceCorrect2="False" ChoiceCorrect3="True" ChoiceCorrect4="False" />
+    <QuizItem Question="What do cats say?" Points="1" QuestionType="MultipleChoice" ChoiceDesc1="Meow" ChoiceDesc2="Gorp" ChoiceDesc3="Moo" ChoiceDesc4="Bark" ChoiceCorrect1="True" ChoiceCorrect2="False" ChoiceCorrect3="False" ChoiceCorrect4="False" />
+    <QuizItem Question="How many lives do cats supposedly have?" Points="1" QuestionType="MultipleChoice" ChoiceDesc1="6" ChoiceDesc2="7" ChoiceDesc3="8" ChoiceDesc4="9" ChoiceCorrect1="False" ChoiceCorrect2="False" ChoiceCorrect3="False" ChoiceCorrect4="True" />
+  </Quiz>
+</QuizList>
