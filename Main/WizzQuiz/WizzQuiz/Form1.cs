@@ -227,6 +227,7 @@ namespace WizzQuiz
             pnlLibrary.Visible = false;
             pnlCreate.Visible = true;
             pnlCreate.BringToFront();
+            Quiz.Clear();
         }
 
         private void btnAddMultipleChoice_Click(object sender, EventArgs e)
