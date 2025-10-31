@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.IO;
 using System.Reflection.Metadata;
+using System.Security.Cryptography;
 using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Linq;
@@ -11,6 +12,7 @@ namespace WizzQuiz
     public partial class WizzQuizForm : Form
     {
         List<QuizItem> Quiz = new List<QuizItem>();
+        // String path = "C:/Users/beaZ13/SynologyDrive/School/Y3S1_files/msys(dsa)_files/dsa_proj/WizzQuiz/Main/WizzQuiz/WizzQuiz/Quizzes.xml";
         String path = "C:/Users/Mikey/Source/Repos/WizzQuiz/Main/WizzQuiz/WizzQuiz/Quizzes.xml";
         public WizzQuizForm()
         {
@@ -74,6 +76,7 @@ namespace WizzQuiz
             foreach (XmlElement quiz in rootNode.ChildNodes)
             {
                 lbxQuizList.Items.Add($"{quizNumber.ToString()}: " + quiz.GetAttribute("QuizName"));
+                quizNumber++;
             }
         }
         private void WizzQuizForm_Load(object sender, EventArgs e)
@@ -109,12 +112,55 @@ namespace WizzQuiz
 
         private void btnEditQuiz_Click(object sender, EventArgs e)
         {
+            int selectedQuizIndex = lbxQuizList.SelectedIndex;
 
+            if (selectedQuizIndex < 0)
+            {
+                MessageBox.Show("Please select a quiz.",
+                    "No Quiz Selected",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+            }
+            else
+            {
+            }
         }
 
         private void btnDeleteQuiz_Click(object sender, EventArgs e)
         {
+            int selectedQuizIndex = lbxQuizList.SelectedIndex;
 
+            if (selectedQuizIndex < 0)
+            {
+                MessageBox.Show("Please select a quiz.",
+                    "No Quiz Selected",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+            }
+            else
+            {
+                DialogResult resultDeleteMessage = MessageBox.Show($"Are you sure you want to delete this Quiz?",
+                    "Confirm Quiz Deletion",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+                if (resultDeleteMessage == DialogResult.Yes)
+                {
+                    // Delete Quiz in xml
+                    XmlDocument doc = new();
+                    doc.Load(path);
+                    XmlElement rootNode = doc.DocumentElement;
+                    rootNode.RemoveChild(rootNode.ChildNodes[selectedQuizIndex]);
+                    doc.Save(path);
+
+                    UpdateQuizList();
+                    pnlIdentification.Visible = false;
+                    pnlMultiple.Visible = false;
+
+                    MessageBox.Show("Quiz successfully deleted",
+                    "Quiz Deleted",
+                    MessageBoxButtons.OK);
+                }
+            }
         }
 
         private void lblLibrary_Click(object sender, EventArgs e)

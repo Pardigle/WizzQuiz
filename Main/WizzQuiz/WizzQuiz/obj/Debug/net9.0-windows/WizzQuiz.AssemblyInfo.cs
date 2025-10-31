@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("WizzQuiz")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c1533680cd0a86cd8957821e285f80e3fefbe75f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+486ede5e6105b20f2aee5133fe657d87959ce16a")]
 [assembly: System.Reflection.AssemblyProductAttribute("WizzQuiz")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WizzQuiz")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
