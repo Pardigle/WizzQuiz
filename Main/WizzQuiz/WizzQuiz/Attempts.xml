@@ -34,4 +34,13 @@
   <Attempt QuizName="Alphabet">
     <AttemptItem Question="What letter is right after A" Points="1" QuestionType="MultipleChoice" ChoiceDesc1="B" ChoiceDesc2="C" ChoiceDesc3="D" ChoiceDesc4="E" ChoiceCorrect1="True" ChoiceCorrect2="False" ChoiceCorrect3="False" ChoiceCorrect4="False" ChoiceSelected1="True" ChoiceSelected2="False" ChoiceSelected3="False" ChoiceSelected4="False" />
   </Attempt>
+  <Attempt QuizName="Quiz about quizzes">
+    <AttemptItem Question="How do you spell &quot;Quiz&quot;?" Points="1" QuestionType="MultipleChoice" ChoiceDesc1="Qwoz" ChoiceDesc2="Qweez" ChoiceDesc3="Kwiz" ChoiceDesc4="Quiz" ChoiceCorrect1="False" ChoiceCorrect2="False" ChoiceCorrect3="False" ChoiceCorrect4="True" ChoiceSelected1="False" ChoiceSelected2="False" ChoiceSelected3="True" ChoiceSelected4="False" />
+    <AttemptItem Question="How many points is NOT alloted for this question?" Points="1" QuestionType="MultipleChoice" ChoiceDesc1="Not 1" ChoiceDesc2="2" ChoiceDesc3="1" ChoiceDesc4="5" ChoiceCorrect1="True" ChoiceCorrect2="True" ChoiceCorrect3="False" ChoiceCorrect4="True" ChoiceSelected1="True" ChoiceSelected2="True" ChoiceSelected3="False" ChoiceSelected4="True" />
+    <AttemptItem Question="What was the question number before this current question (question 3)?" Points="1" QuestionType="Identification" CorrectAnswer="2" InputtedAnswer="2" />
+  </Attempt>
+  <Attempt QuizName="Genshin Impact Quiz">
+    <AttemptItem Question="What was the name of the first nation introduced to the player?" Points="1" QuestionType="Identification" CorrectAnswer="Mondstadt" InputtedAnswer="Liyue" />
+    <AttemptItem Question="Who is the traveller's companion?" Points="1" QuestionType="MultipleChoice" ChoiceDesc1="Kamisato Ayaka" ChoiceDesc2="Tartaglia" ChoiceDesc3="Raiden Shogun" ChoiceDesc4="Paimon" ChoiceCorrect1="False" ChoiceCorrect2="False" ChoiceCorrect3="False" ChoiceCorrect4="True" ChoiceSelected1="False" ChoiceSelected2="False" ChoiceSelected3="False" ChoiceSelected4="True" />
+  </Attempt>
 </AttemptList>

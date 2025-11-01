@@ -17,4 +17,8 @@
   <Quiz QuizName="Alphabet">
     <QuizItem Question="What letter is right after A" Points="1" QuestionType="MultipleChoice" ChoiceDesc1="B" ChoiceDesc2="C" ChoiceDesc3="D" ChoiceDesc4="E" ChoiceCorrect1="True" ChoiceCorrect2="False" ChoiceCorrect3="False" ChoiceCorrect4="False" />
   </Quiz>
+  <Quiz QuizName="Genshin Impact Quiz">
+    <QuizItem Question="What was the name of the first nation introduced to the player?" Points="1" QuestionType="Identification" CorrectAnswer="Mondstadt" />
+    <QuizItem Question="Who is the traveller's companion?" Points="1" QuestionType="MultipleChoice" ChoiceDesc1="Kamisato Ayaka" ChoiceDesc2="Tartaglia" ChoiceDesc3="Raiden Shogun" ChoiceDesc4="Paimon" ChoiceCorrect1="False" ChoiceCorrect2="False" ChoiceCorrect3="False" ChoiceCorrect4="True" />
+  </Quiz>
 </QuizList>

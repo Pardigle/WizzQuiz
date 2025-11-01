@@ -20,10 +20,10 @@ namespace WizzQuiz
         int currentAttemptIndex = 0;
         int currentAttemptIndexForViewing = 0;
 
-        String path = "C:/Users/beaZ13/SynologyDrive/School/Y3S1_files/msys(dsa)_files/dsa_proj/WizzQuiz/Main/WizzQuiz/WizzQuiz/Quizzes.xml";
-        String pathAttempts = "C:/Users/beaZ13/SynologyDrive/School/Y3S1_files/msys(dsa)_files/dsa_proj/WizzQuiz/Main/WizzQuiz/WizzQuiz/Attempts.xml";
-        //String path = "C:/Users/Mikey/Source/Repos/WizzQuiz/Main/WizzQuiz/WizzQuiz/Quizzes.xml";
-        //String pathAttempts = "C:/Users/Mikey/Source/Repos/WizzQuiz/Main/WizzQuiz/WizzQuiz/Attempts.xml";
+        //String path = "C:/Users/beaZ13/SynologyDrive/School/Y3S1_files/msys(dsa)_files/dsa_proj/WizzQuiz/Main/WizzQuiz/WizzQuiz/Quizzes.xml";
+        //String pathAttempts = "C:/Users/beaZ13/SynologyDrive/School/Y3S1_files/msys(dsa)_files/dsa_proj/WizzQuiz/Main/WizzQuiz/WizzQuiz/Attempts.xml";
+        String path = "C:/Users/Mikey/Source/Repos/WizzQuiz/Main/WizzQuiz/WizzQuiz/Quizzes.xml";
+        String pathAttempts = "C:/Users/Mikey/Source/Repos/WizzQuiz/Main/WizzQuiz/WizzQuiz/Attempts.xml";
 
         bool editState = false; // checks whether user is currently editing a quiz
 
@@ -552,6 +552,7 @@ namespace WizzQuiz
             pnlCreate.BringToFront();
             lblCreate.Text = "Create Quiz";
             Quiz.Clear();
+            lbxQuestionList.Items.Clear();
         }
 
         private void btnAddMultipleChoice_Click(object sender, EventArgs e)
@@ -720,6 +721,9 @@ namespace WizzQuiz
 
                 rootNode.ReplaceChild(quiz, quizToEdit);
                 editState = false;
+                pnlCreate.Visible = false;
+                pnlLibrary.Visible = true;
+                pnlLibrary.BringToFront();
             }
 
 
@@ -1156,7 +1160,7 @@ namespace WizzQuiz
             }
             else
             {
-                MessageBox.Show("Provide an answer to all questions.", "Missing Answers.", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Provide an answer to all questions.", "Missing Answers", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -1468,7 +1472,7 @@ namespace WizzQuiz
     public class QuizItem
     {
         public String question = "";
-        public int points;
+        public int points = 1;
         public String questionType = "";
     }
 
