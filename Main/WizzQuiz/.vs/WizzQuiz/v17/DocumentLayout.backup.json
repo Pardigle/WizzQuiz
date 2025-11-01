@@ -58,8 +58,7 @@
               "RelativeToolTip": "WizzQuiz\\Attempts.xml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003576|",
-              "WhenOpened": "2025-10-31T16:50:37.3Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-31T16:50:37.3Z"
             },
             {
               "$type": "Document",
@@ -71,8 +70,7 @@
               "RelativeToolTip": "WizzQuiz\\Quizzes.xml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAALAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003576|",
-              "WhenOpened": "2025-10-30T23:21:22.583Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-30T23:21:22.583Z"
             },
             {
               "$type": "Document",
@@ -82,7 +80,7 @@
               "RelativeDocumentMoniker": "WizzQuiz\\Form1.cs",
               "ToolTip": "C:\\Users\\Mikey\\source\\repos\\WizzQuiz\\Main\\WizzQuiz\\WizzQuiz\\Form1.cs",
               "RelativeToolTip": "WizzQuiz\\Form1.cs",
-              "ViewState": "AgIAACoEAAAAAAAAAAAowDUEAAANAAAAAAAAAA==",
+              "ViewState": "AgIAACoEAAAAAAAAAAAowDoEAABBAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-29T07:00:26.019Z",
               "EditorCaption": ""
@@ -97,8 +95,7 @@
               "RelativeToolTip": "WizzQuiz\\Form1.Designer.cs",
               "ViewState": "AgIAAHgCAAAAAAAAAAAgwIsCAAA3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-29T07:19:15.067Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-29T07:19:15.067Z"
             },
             {
               "$type": "Document",
@@ -109,8 +106,7 @@
               "ToolTip": "C:\\Users\\Mikey\\source\\repos\\WizzQuiz\\Main\\WizzQuiz\\WizzQuiz\\Form1.cs [Design]",
               "RelativeToolTip": "WizzQuiz\\Form1.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-28T13:13:11.726Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2025-10-28T13:13:11.726Z"
             }
           ]
         }

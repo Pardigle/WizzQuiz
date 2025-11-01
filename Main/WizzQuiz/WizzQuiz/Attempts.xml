@@ -21,4 +21,11 @@
     <AttemptItem Question="(True or False) Cats always land on their paws" Points="1" QuestionType="Identification" CorrectAnswer="True" InputtedAnswer="asdf" />
     <AttemptItem Question="(True or False) Pilar is the best cat that has ever existed." Points="100" QuestionType="Identification" CorrectAnswer="True" InputtedAnswer="asdf" />
   </Attempt>
+  <Attempt QuizName="Basic Math 1">
+    <AttemptItem Question="1 + 1 = ?" Points="1" QuestionType="Identification" CorrectAnswer="2" InputtedAnswer="2" />
+    <AttemptItem Question="What shape does the function f(x) = x^2 + 2 make?" Points="2" QuestionType="MultipleChoice" ChoiceDesc1="Square" ChoiceDesc2="Circle" ChoiceDesc3="Hyperbola" ChoiceDesc4="Parabola" ChoiceCorrect1="False" ChoiceCorrect2="False" ChoiceCorrect3="False" ChoiceCorrect4="True" />
+    <AttemptItem Question="What is the second derivative with respect to x of the function f(x) = sin(x)?" Points="2" QuestionType="MultipleChoice" ChoiceDesc1="f'(x) = cos(x)" ChoiceDesc2="f''(x) = -sin(x)" ChoiceDesc3="f''(x) = sin(x)" ChoiceDesc4="f''(x) = sin(x) * x" ChoiceCorrect1="False" ChoiceCorrect2="True" ChoiceCorrect3="False" ChoiceCorrect4="False" />
+    <AttemptItem Question="What is the rank of the matrix below? &#xD;&#xA;| 2  3  -1 |&#xD;&#xA;| 0  1   4 |&#xD;&#xA;| 0  0   0 |&#xD;&#xA;(Hint: rank = maximum no. of linearly independent vectors)" Points="2" QuestionType="MultipleChoice" ChoiceDesc1="0" ChoiceDesc2="1" ChoiceDesc3="2" ChoiceDesc4="3" ChoiceCorrect1="False" ChoiceCorrect2="False" ChoiceCorrect3="True" ChoiceCorrect4="False" />
+    <AttemptItem Question="What is the real number solution of the equation x = 2x?" Points="2" QuestionType="Identification" CorrectAnswer="0" InputtedAnswer="0" />
+  </Attempt>
 </AttemptList>
