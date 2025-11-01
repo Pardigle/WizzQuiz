@@ -140,6 +140,48 @@ namespace WizzQuiz
                 }
             }
         }
+        public static string computeScore(XmlElement attempt)
+        {
+            int myScore = 0;
+            int totalPoints = 0;
+
+            foreach (XmlElement question in attempt.ChildNodes)
+            { 
+                string questionType = question.GetAttribute("QuestionType");
+                int points = Convert.ToInt32(question.GetAttribute("Points"));
+                totalPoints += points;
+
+                if (questionType == "Identification")
+                {
+                    string myAnswer = question.GetAttribute("InputtedAnswer").ToLower().Trim();
+                    string correctAnswer = question.GetAttribute("CorrectAnswer").ToLower().Trim();
+
+                    if (myAnswer == correctAnswer)
+                    {
+                        myScore += points;
+                    }
+                }
+                else if (questionType == "MultipleChoice")
+                {
+                    bool choiceCorrect1 = Convert.ToBoolean(question.GetAttribute("ChoiceCorrect1"));
+                    bool choiceCorrect2 = Convert.ToBoolean(question.GetAttribute("ChoiceCorrect2"));
+                    bool choiceCorrect3 = Convert.ToBoolean(question.GetAttribute("ChoiceCorrect3"));
+                    bool choiceCorrect4 = Convert.ToBoolean(question.GetAttribute("ChoiceCorrect4"));
+                    bool choiceSelected1 = Convert.ToBoolean(question.GetAttribute("ChoiceSelected1"));
+                    bool choiceSelected2 = Convert.ToBoolean(question.GetAttribute("ChoiceSelected2"));
+                    bool choiceSelected3 = Convert.ToBoolean(question.GetAttribute("ChoiceSelected3"));
+                    bool choiceSelected4 = Convert.ToBoolean(question.GetAttribute("ChoiceSelected4"));
+
+                    if (choiceSelected1 == choiceCorrect1 && choiceSelected2 == choiceCorrect2 && choiceSelected3 == choiceCorrect3 && choiceSelected4 == choiceCorrect4)
+                    {
+                        myScore += points;
+                    }
+
+                }
+            }
+
+            return $"{myScore} / {totalPoints}";
+        }
         public void UpdateAttemptList()
         {
             XmlDocument doc = new();
@@ -171,10 +213,11 @@ namespace WizzQuiz
                 }
 
                 ListViewItem attempt = new ListViewItem(quizName + $"    (Attempt #{attemptNumber})");
-                attempt.SubItems.Add("score placeholder");
+                attempt.SubItems.Add(computeScore(item));
                 lsvAttemptList.Items.Add(attempt);
             }
         }
+        
         
         private void WizzQuizForm_Load(object sender, EventArgs e)
         {
@@ -961,6 +1004,10 @@ namespace WizzQuiz
                         attemptItem.SetAttributeNode(choiceCorrect2);
                         attemptItem.SetAttributeNode(choiceCorrect3);
                         attemptItem.SetAttributeNode(choiceCorrect4);
+                        attemptItem.SetAttributeNode(choiceSelected1);
+                        attemptItem.SetAttributeNode(choiceSelected2);
+                        attemptItem.SetAttributeNode(choiceSelected3);
+                        attemptItem.SetAttributeNode(choiceSelected4);
                     }
                     else
                     {
