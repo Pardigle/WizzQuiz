@@ -1080,7 +1080,7 @@ namespace WizzQuiz
 
         private void tbxAnswerIdentification_TextChanged(object sender, EventArgs e)
         {
-            if (-1 > currentAttemptIndex && currentAttemptIndex > QuizAttempt.Count())
+            if (-1 < currentAttemptIndex && currentAttemptIndex < QuizAttempt.Count())
             {
                 QuizItem attemptItem = QuizAttempt[currentAttemptIndex];
                 if (currentAttemptIndex < QuizAttempt.Count() && attemptItem.questionType == "Identification")
