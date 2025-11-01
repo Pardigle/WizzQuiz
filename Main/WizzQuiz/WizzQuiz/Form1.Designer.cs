@@ -94,6 +94,35 @@
             tbxAnswerQuestion = new TextBox();
             tbxAnswerQuestionNumber = new TextBox();
             lblCreate1 = new Label();
+            pnlViewAttempt = new Panel();
+            tbxAttemptQuizName = new TextBox();
+            btnAttemptPrev = new Button();
+            btnAttemptNext = new Button();
+            label12 = new Label();
+            lblViewAttempt = new Label();
+            pnlAttemptAnswerIdentification = new Panel();
+            tbxUserAnswerIdentification = new TextBox();
+            label13 = new Label();
+            tbxAttemptAnswerIdentification = new TextBox();
+            label11 = new Label();
+            pnlAttemptAnswerMultiple = new Panel();
+            tbxAttemptChoice4 = new TextBox();
+            pnlChoice4 = new Panel();
+            tbxAttemptChoice3 = new TextBox();
+            pnlChoice3 = new Panel();
+            tbxAttemptChoice2 = new TextBox();
+            pnlChoice2 = new Panel();
+            tbxAttemptChoice1 = new TextBox();
+            pnlChoice1 = new Panel();
+            label15 = new Label();
+            btnViewAttemptJumpTo = new Button();
+            btnBackToAttemptList = new Button();
+            pnlAttemptQuestion = new Panel();
+            label14 = new Label();
+            tbxAttemptQuestionPoints = new TextBox();
+            tbxAttemptQuestion = new TextBox();
+            tbxAttemptQuestionNumber = new TextBox();
+            lbxAttemptQuestionList = new ListBox();
             pnlAttempts = new Panel();
             lsvAttemptList = new ListView();
             btnViewAttemptFromList = new Button();
@@ -109,6 +138,10 @@
             pnlAnswerIdentification.SuspendLayout();
             pnlAnswerMultiple.SuspendLayout();
             pnlAnswerQuestion.SuspendLayout();
+            pnlViewAttempt.SuspendLayout();
+            pnlAttemptAnswerIdentification.SuspendLayout();
+            pnlAttemptAnswerMultiple.SuspendLayout();
+            pnlAttemptQuestion.SuspendLayout();
             pnlAttempts.SuspendLayout();
             SuspendLayout();
             // 
@@ -205,7 +238,7 @@
             lblLibrary.Location = new Point(15, 45);
             lblLibrary.Margin = new Padding(5, 0, 5, 0);
             lblLibrary.Name = "lblLibrary";
-            lblLibrary.Size = new Size(311, 71);
+            lblLibrary.Size = new Size(323, 71);
             lblLibrary.TabIndex = 3;
             lblLibrary.Text = "Your Library";
             lblLibrary.Click += lblLibrary_Click;
@@ -868,6 +901,301 @@
             lblCreate1.Text = "Answer Quiz";
             lblCreate1.Click += lblCreate1_Click;
             // 
+            // pnlViewAttempt
+            // 
+            pnlViewAttempt.Controls.Add(tbxAttemptQuizName);
+            pnlViewAttempt.Controls.Add(btnAttemptPrev);
+            pnlViewAttempt.Controls.Add(btnAttemptNext);
+            pnlViewAttempt.Controls.Add(label12);
+            pnlViewAttempt.Controls.Add(lblViewAttempt);
+            pnlViewAttempt.Controls.Add(pnlAttemptAnswerIdentification);
+            pnlViewAttempt.Controls.Add(pnlAttemptAnswerMultiple);
+            pnlViewAttempt.Controls.Add(btnViewAttemptJumpTo);
+            pnlViewAttempt.Controls.Add(btnBackToAttemptList);
+            pnlViewAttempt.Controls.Add(pnlAttemptQuestion);
+            pnlViewAttempt.Controls.Add(lbxAttemptQuestionList);
+            pnlViewAttempt.Location = new Point(18, 24);
+            pnlViewAttempt.Name = "pnlViewAttempt";
+            pnlViewAttempt.Size = new Size(1547, 823);
+            pnlViewAttempt.TabIndex = 15;
+            // 
+            // tbxAttemptQuizName
+            // 
+            tbxAttemptQuizName.Location = new Point(174, 137);
+            tbxAttemptQuizName.Margin = new Padding(5);
+            tbxAttemptQuizName.Name = "tbxAttemptQuizName";
+            tbxAttemptQuizName.ReadOnly = true;
+            tbxAttemptQuizName.Size = new Size(906, 39);
+            tbxAttemptQuizName.TabIndex = 16;
+            // 
+            // btnAttemptPrev
+            // 
+            btnAttemptPrev.Location = new Point(22, 725);
+            btnAttemptPrev.Margin = new Padding(5);
+            btnAttemptPrev.Name = "btnAttemptPrev";
+            btnAttemptPrev.Size = new Size(528, 62);
+            btnAttemptPrev.TabIndex = 15;
+            btnAttemptPrev.Text = "<Prev";
+            btnAttemptPrev.UseVisualStyleBackColor = true;
+            btnAttemptPrev.Visible = false;
+            btnAttemptPrev.Click += btnAttemptPrev_Click;
+            // 
+            // btnAttemptNext
+            // 
+            btnAttemptNext.Location = new Point(560, 728);
+            btnAttemptNext.Margin = new Padding(5);
+            btnAttemptNext.Name = "btnAttemptNext";
+            btnAttemptNext.Size = new Size(520, 59);
+            btnAttemptNext.TabIndex = 16;
+            btnAttemptNext.Text = "Next>";
+            btnAttemptNext.UseVisualStyleBackColor = true;
+            btnAttemptNext.Visible = false;
+            btnAttemptNext.Click += btnAttemptNext_Click;
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Location = new Point(24, 141);
+            label12.Margin = new Padding(5, 0, 5, 0);
+            label12.Name = "label12";
+            label12.Size = new Size(139, 32);
+            label12.TabIndex = 15;
+            label12.Text = "Quiz Name:";
+            // 
+            // lblViewAttempt
+            // 
+            lblViewAttempt.AutoSize = true;
+            lblViewAttempt.Font = new Font("Segoe UI Semibold", 20F, FontStyle.Bold);
+            lblViewAttempt.Location = new Point(47, 45);
+            lblViewAttempt.Margin = new Padding(5, 0, 5, 0);
+            lblViewAttempt.Name = "lblViewAttempt";
+            lblViewAttempt.Size = new Size(369, 72);
+            lblViewAttempt.TabIndex = 8;
+            lblViewAttempt.Text = "View Attempt";
+            // 
+            // pnlAttemptAnswerIdentification
+            // 
+            pnlAttemptAnswerIdentification.Controls.Add(tbxUserAnswerIdentification);
+            pnlAttemptAnswerIdentification.Controls.Add(label13);
+            pnlAttemptAnswerIdentification.Controls.Add(tbxAttemptAnswerIdentification);
+            pnlAttemptAnswerIdentification.Controls.Add(label11);
+            pnlAttemptAnswerIdentification.Location = new Point(22, 496);
+            pnlAttemptAnswerIdentification.Margin = new Padding(5);
+            pnlAttemptAnswerIdentification.Name = "pnlAttemptAnswerIdentification";
+            pnlAttemptAnswerIdentification.Size = new Size(1058, 218);
+            pnlAttemptAnswerIdentification.TabIndex = 15;
+            // 
+            // tbxUserAnswerIdentification
+            // 
+            tbxUserAnswerIdentification.ForeColor = SystemColors.ButtonHighlight;
+            tbxUserAnswerIdentification.Location = new Point(21, 157);
+            tbxUserAnswerIdentification.Margin = new Padding(5);
+            tbxUserAnswerIdentification.Multiline = true;
+            tbxUserAnswerIdentification.Name = "tbxUserAnswerIdentification";
+            tbxUserAnswerIdentification.ReadOnly = true;
+            tbxUserAnswerIdentification.Size = new Size(1013, 39);
+            tbxUserAnswerIdentification.TabIndex = 3;
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Location = new Point(21, 120);
+            label13.Margin = new Padding(5, 0, 5, 0);
+            label13.Name = "label13";
+            label13.Size = new Size(150, 32);
+            label13.TabIndex = 2;
+            label13.Text = "Your Answer:";
+            // 
+            // tbxAttemptAnswerIdentification
+            // 
+            tbxAttemptAnswerIdentification.Location = new Point(20, 56);
+            tbxAttemptAnswerIdentification.Margin = new Padding(5);
+            tbxAttemptAnswerIdentification.Multiline = true;
+            tbxAttemptAnswerIdentification.Name = "tbxAttemptAnswerIdentification";
+            tbxAttemptAnswerIdentification.ReadOnly = true;
+            tbxAttemptAnswerIdentification.Size = new Size(1013, 39);
+            tbxAttemptAnswerIdentification.TabIndex = 1;
+            tbxAttemptAnswerIdentification.TextChanged += tbxAttemptAnswerIdentification_TextChanged;
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Location = new Point(20, 19);
+            label11.Margin = new Padding(5, 0, 5, 0);
+            label11.Name = "label11";
+            label11.Size = new Size(180, 32);
+            label11.TabIndex = 0;
+            label11.Text = "Correct Answer:";
+            // 
+            // pnlAttemptAnswerMultiple
+            // 
+            pnlAttemptAnswerMultiple.Controls.Add(tbxAttemptChoice4);
+            pnlAttemptAnswerMultiple.Controls.Add(pnlChoice4);
+            pnlAttemptAnswerMultiple.Controls.Add(tbxAttemptChoice3);
+            pnlAttemptAnswerMultiple.Controls.Add(pnlChoice3);
+            pnlAttemptAnswerMultiple.Controls.Add(tbxAttemptChoice2);
+            pnlAttemptAnswerMultiple.Controls.Add(pnlChoice2);
+            pnlAttemptAnswerMultiple.Controls.Add(tbxAttemptChoice1);
+            pnlAttemptAnswerMultiple.Controls.Add(pnlChoice1);
+            pnlAttemptAnswerMultiple.Controls.Add(label15);
+            pnlAttemptAnswerMultiple.Location = new Point(22, 496);
+            pnlAttemptAnswerMultiple.Margin = new Padding(5);
+            pnlAttemptAnswerMultiple.Name = "pnlAttemptAnswerMultiple";
+            pnlAttemptAnswerMultiple.Size = new Size(1058, 214);
+            pnlAttemptAnswerMultiple.TabIndex = 17;
+            // 
+            // tbxAttemptChoice4
+            // 
+            tbxAttemptChoice4.Location = new Point(611, 127);
+            tbxAttemptChoice4.Name = "tbxAttemptChoice4";
+            tbxAttemptChoice4.ReadOnly = true;
+            tbxAttemptChoice4.Size = new Size(420, 39);
+            tbxAttemptChoice4.TabIndex = 12;
+            // 
+            // pnlChoice4
+            // 
+            pnlChoice4.Location = new Point(554, 127);
+            pnlChoice4.Name = "pnlChoice4";
+            pnlChoice4.Size = new Size(39, 39);
+            pnlChoice4.TabIndex = 11;
+            // 
+            // tbxAttemptChoice3
+            // 
+            tbxAttemptChoice3.Location = new Point(611, 72);
+            tbxAttemptChoice3.Name = "tbxAttemptChoice3";
+            tbxAttemptChoice3.ReadOnly = true;
+            tbxAttemptChoice3.Size = new Size(420, 39);
+            tbxAttemptChoice3.TabIndex = 10;
+            // 
+            // pnlChoice3
+            // 
+            pnlChoice3.Location = new Point(554, 72);
+            pnlChoice3.Name = "pnlChoice3";
+            pnlChoice3.Size = new Size(39, 39);
+            pnlChoice3.TabIndex = 9;
+            // 
+            // tbxAttemptChoice2
+            // 
+            tbxAttemptChoice2.Location = new Point(82, 129);
+            tbxAttemptChoice2.Name = "tbxAttemptChoice2";
+            tbxAttemptChoice2.ReadOnly = true;
+            tbxAttemptChoice2.Size = new Size(420, 39);
+            tbxAttemptChoice2.TabIndex = 8;
+            // 
+            // pnlChoice2
+            // 
+            pnlChoice2.Location = new Point(25, 129);
+            pnlChoice2.Name = "pnlChoice2";
+            pnlChoice2.Size = new Size(39, 39);
+            pnlChoice2.TabIndex = 7;
+            // 
+            // tbxAttemptChoice1
+            // 
+            tbxAttemptChoice1.Location = new Point(84, 72);
+            tbxAttemptChoice1.Name = "tbxAttemptChoice1";
+            tbxAttemptChoice1.ReadOnly = true;
+            tbxAttemptChoice1.Size = new Size(420, 39);
+            tbxAttemptChoice1.TabIndex = 6;
+            // 
+            // pnlChoice1
+            // 
+            pnlChoice1.Location = new Point(27, 72);
+            pnlChoice1.Name = "pnlChoice1";
+            pnlChoice1.Size = new Size(39, 39);
+            pnlChoice1.TabIndex = 5;
+            // 
+            // label15
+            // 
+            label15.AutoSize = true;
+            label15.Location = new Point(23, 19);
+            label15.Margin = new Padding(5, 0, 5, 0);
+            label15.Name = "label15";
+            label15.Size = new Size(96, 32);
+            label15.TabIndex = 0;
+            label15.Text = "Answer:";
+            // 
+            // btnViewAttemptJumpTo
+            // 
+            btnViewAttemptJumpTo.Location = new Point(1090, 704);
+            btnViewAttemptJumpTo.Margin = new Padding(5);
+            btnViewAttemptJumpTo.Name = "btnViewAttemptJumpTo";
+            btnViewAttemptJumpTo.Size = new Size(398, 80);
+            btnViewAttemptJumpTo.TabIndex = 15;
+            btnViewAttemptJumpTo.Text = "Jump To";
+            btnViewAttemptJumpTo.UseVisualStyleBackColor = true;
+            btnViewAttemptJumpTo.Click += btnViewAttemptJumpTo_Click;
+            // 
+            // btnBackToAttemptList
+            // 
+            btnBackToAttemptList.Location = new Point(1229, 79);
+            btnBackToAttemptList.Margin = new Padding(5);
+            btnBackToAttemptList.Name = "btnBackToAttemptList";
+            btnBackToAttemptList.Size = new Size(257, 61);
+            btnBackToAttemptList.TabIndex = 15;
+            btnBackToAttemptList.Text = "Back to Attempt List";
+            btnBackToAttemptList.UseVisualStyleBackColor = true;
+            btnBackToAttemptList.Click += btnBackToAttemptList_Click;
+            // 
+            // pnlAttemptQuestion
+            // 
+            pnlAttemptQuestion.Controls.Add(label14);
+            pnlAttemptQuestion.Controls.Add(tbxAttemptQuestionPoints);
+            pnlAttemptQuestion.Controls.Add(tbxAttemptQuestion);
+            pnlAttemptQuestion.Controls.Add(tbxAttemptQuestionNumber);
+            pnlAttemptQuestion.Location = new Point(22, 200);
+            pnlAttemptQuestion.Margin = new Padding(5);
+            pnlAttemptQuestion.Name = "pnlAttemptQuestion";
+            pnlAttemptQuestion.Size = new Size(1058, 290);
+            pnlAttemptQuestion.TabIndex = 3;
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Location = new Point(785, 22);
+            label14.Margin = new Padding(5, 0, 5, 0);
+            label14.Name = "label14";
+            label14.Size = new Size(83, 32);
+            label14.TabIndex = 17;
+            label14.Text = "Points:";
+            // 
+            // tbxAttemptQuestionPoints
+            // 
+            tbxAttemptQuestionPoints.Location = new Point(873, 18);
+            tbxAttemptQuestionPoints.Margin = new Padding(5);
+            tbxAttemptQuestionPoints.Name = "tbxAttemptQuestionPoints";
+            tbxAttemptQuestionPoints.ReadOnly = true;
+            tbxAttemptQuestionPoints.Size = new Size(160, 39);
+            tbxAttemptQuestionPoints.TabIndex = 2;
+            // 
+            // tbxAttemptQuestion
+            // 
+            tbxAttemptQuestion.Location = new Point(23, 75);
+            tbxAttemptQuestion.Margin = new Padding(5);
+            tbxAttemptQuestion.Multiline = true;
+            tbxAttemptQuestion.Name = "tbxAttemptQuestion";
+            tbxAttemptQuestion.ReadOnly = true;
+            tbxAttemptQuestion.Size = new Size(1008, 190);
+            tbxAttemptQuestion.TabIndex = 1;
+            // 
+            // tbxAttemptQuestionNumber
+            // 
+            tbxAttemptQuestionNumber.Location = new Point(21, 22);
+            tbxAttemptQuestionNumber.Margin = new Padding(5);
+            tbxAttemptQuestionNumber.Name = "tbxAttemptQuestionNumber";
+            tbxAttemptQuestionNumber.ReadOnly = true;
+            tbxAttemptQuestionNumber.Size = new Size(223, 39);
+            tbxAttemptQuestionNumber.TabIndex = 0;
+            // 
+            // lbxAttemptQuestionList
+            // 
+            lbxAttemptQuestionList.FormattingEnabled = true;
+            lbxAttemptQuestionList.Location = new Point(1090, 150);
+            lbxAttemptQuestionList.Margin = new Padding(5);
+            lbxAttemptQuestionList.Name = "lbxAttemptQuestionList";
+            lbxAttemptQuestionList.Size = new Size(396, 548);
+            lbxAttemptQuestionList.TabIndex = 15;
+            lbxAttemptQuestionList.SelectedIndexChanged += lbxAttemptQuestionList_SelectedIndexChanged;
+            // 
             // pnlAttempts
             // 
             pnlAttempts.Controls.Add(lsvAttemptList);
@@ -927,10 +1255,11 @@
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1594, 867);
-            Controls.Add(pnlAttempts);
-            Controls.Add(pnlLibrary);
+            Controls.Add(pnlViewAttempt);
             Controls.Add(pnlAnswer);
             Controls.Add(pnlCreate);
+            Controls.Add(pnlAttempts);
+            Controls.Add(pnlLibrary);
             ForeColor = SystemColors.ControlText;
             Margin = new Padding(5);
             Name = "WizzQuizForm";
@@ -954,6 +1283,14 @@
             pnlAnswerMultiple.PerformLayout();
             pnlAnswerQuestion.ResumeLayout(false);
             pnlAnswerQuestion.PerformLayout();
+            pnlViewAttempt.ResumeLayout(false);
+            pnlViewAttempt.PerformLayout();
+            pnlAttemptAnswerIdentification.ResumeLayout(false);
+            pnlAttemptAnswerIdentification.PerformLayout();
+            pnlAttemptAnswerMultiple.ResumeLayout(false);
+            pnlAttemptAnswerMultiple.PerformLayout();
+            pnlAttemptQuestion.ResumeLayout(false);
+            pnlAttemptQuestion.PerformLayout();
             pnlAttempts.ResumeLayout(false);
             pnlAttempts.PerformLayout();
             ResumeLayout(false);
@@ -1032,5 +1369,34 @@
         private Button btnBackToLibraryAttempts;
         private Button btnViewAttemptFromList;
         private ListView lsvAttemptList;
+        private Label lblViewAttempt;
+        private Button btnBackToAttemptList;
+        private Button btnViewAttemptJumpTo;
+        private ListBox lbxAttemptQuestionList;
+        private Panel pnlAttemptQuestion;
+        private TextBox tbxAttemptQuestionPoints;
+        private TextBox tbxAttemptQuestion;
+        private TextBox tbxAttemptQuestionNumber;
+        private Button btnAttemptNext;
+        private Button btnAttemptPrev;
+        private Panel pnlAttemptAnswerIdentification;
+        private TextBox tbxAttemptAnswerIdentification;
+        private Label label11;
+        private Panel pnlViewAttempt;
+        private TextBox tbxAttemptQuizName;
+        private Label label12;
+        private TextBox tbxUserAnswerIdentification;
+        private Label label13;
+        private Label label14;
+        private Panel pnlAttemptAnswerMultiple;
+        private Label label15;
+        private TextBox tbxAttemptChoice4;
+        private Panel pnlChoice4;
+        private TextBox tbxAttemptChoice3;
+        private Panel pnlChoice3;
+        private TextBox tbxAttemptChoice2;
+        private Panel pnlChoice2;
+        private TextBox tbxAttemptChoice1;
+        private Panel pnlChoice1;
     }
 }

@@ -6,6 +6,7 @@ using System.Security.Cryptography;
 using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Linq;
+using WizzQuiz;
 
 namespace WizzQuiz
 {
@@ -13,12 +14,16 @@ namespace WizzQuiz
     {
         List<QuizItem> Quiz = new List<QuizItem>();
         List<QuizItem> QuizAttempt = new List<QuizItem>();
+        List<QuizItem> AttemptViewer = new List<QuizItem>();
+
         String QuizAnsweredName = "";
         int currentAttemptIndex = 0;
-        //String path = "C:/Users/beaZ13/SynologyDrive/School/Y3S1_files/msys(dsa)_files/dsa_proj/WizzQuiz/Main/WizzQuiz/WizzQuiz/Quizzes.xml";
-        //String pathAttempts = "C:/Users/beaZ13/SynologyDrive/School/Y3S1_files/msys(dsa)_files/dsa_proj/WizzQuiz/Main/WizzQuiz/WizzQuiz/Attempts.xml";
-        String path = "C:/Users/Mikey/Source/Repos/WizzQuiz/Main/WizzQuiz/WizzQuiz/Quizzes.xml";
-        String pathAttempts = "C:/Users/Mikey/Source/Repos/WizzQuiz/Main/WizzQuiz/WizzQuiz/Attempts.xml";
+        int currentAttemptIndexForViewing = 0;
+
+        String path = "C:/Users/beaZ13/SynologyDrive/School/Y3S1_files/msys(dsa)_files/dsa_proj/WizzQuiz/Main/WizzQuiz/WizzQuiz/Quizzes.xml";
+        String pathAttempts = "C:/Users/beaZ13/SynologyDrive/School/Y3S1_files/msys(dsa)_files/dsa_proj/WizzQuiz/Main/WizzQuiz/WizzQuiz/Attempts.xml";
+        //String path = "C:/Users/Mikey/Source/Repos/WizzQuiz/Main/WizzQuiz/WizzQuiz/Quizzes.xml";
+        //String pathAttempts = "C:/Users/Mikey/Source/Repos/WizzQuiz/Main/WizzQuiz/WizzQuiz/Attempts.xml";
 
         bool editState = false; // checks whether user is currently editing a quiz
 
@@ -140,54 +145,171 @@ namespace WizzQuiz
                 }
             }
         }
-        public static string computeScore(XmlElement attempt)
+        public void ViewQuestionIndexForViewingAttempts(int index)
+        {
+            if (index >= 0)
+            {
+                QuizItem indexedItem = AttemptViewer[index];
+                tbxAttemptQuestionNumber.Text = $"Question {(index + 1).ToString()}.";
+                tbxAttemptQuestion.Text = $"{indexedItem.question}";
+
+                pnlAttemptAnswerIdentification.Visible = false; 
+                pnlAttemptAnswerMultiple.Visible = false;
+
+                if (index == 0)
+                {
+                    btnAttemptPrev.Visible = false;
+                }
+                else
+                {
+                    btnAttemptPrev.Visible = true;
+                }
+                if (index == AttemptViewer.Count - 1)
+                {
+                    btnAttemptNext.Visible = false;
+                }
+                else
+                {
+                    btnAttemptNext.Visible = true;
+                }
+
+
+                if (indexedItem.questionType == "Identification")
+                {
+                    pnlAttemptAnswerIdentification.Visible = true;
+                    pnlAttemptAnswerMultiple.Visible = false;
+                    pnlAttemptAnswerIdentification.BringToFront();
+                    AnswerIdentification attemptIdentification = (AnswerIdentification)indexedItem;
+
+                    tbxAttemptAnswerIdentification.Text = attemptIdentification.correctAnswer;
+                    tbxUserAnswerIdentification.Text = attemptIdentification.inputtedAnswer;
+                    tbxUserAnswerIdentification.BackColor = Color.YellowGreen;
+                    tbxAttemptQuestionPoints.Text = $"{indexedItem.points.ToString()} / {indexedItem.points.ToString()}";
+
+                    if (attemptIdentification.correctAnswer.ToLower().Trim() != attemptIdentification.inputtedAnswer.ToLower().Trim())
+                    {
+                        tbxAttemptQuestionPoints.Text = $"0 / {indexedItem.points.ToString()}";
+                        tbxUserAnswerIdentification.BackColor = Color.Tomato;
+                    }
+                    
+                   
+                }
+                else if (indexedItem.questionType == "MultipleChoice")
+                {
+                    pnlAttemptAnswerMultiple.Visible = true;
+                    pnlAttemptAnswerIdentification.Visible = false;
+                    pnlAttemptAnswerMultiple.BringToFront();
+                    pnlChoice1.BackColor = Color.LightGray;
+                    pnlChoice2.BackColor = Color.LightGray;
+                    pnlChoice3.BackColor = Color.LightGray;
+                    pnlChoice4.BackColor = Color.LightGray;
+                    AnswerMultipleChoice attemptMultiple = (AnswerMultipleChoice)indexedItem;
+
+                    tbxAttemptChoice1.Text = attemptMultiple.optionDesc1;
+                    tbxAttemptChoice2.Text = attemptMultiple.optionDesc2;
+                    tbxAttemptChoice3.Text = attemptMultiple.optionDesc3;
+                    tbxAttemptChoice4.Text = attemptMultiple.optionDesc4;
+
+                    tbxAttemptQuestionPoints.Text = $"{indexedItem.points.ToString()} / {indexedItem.points.ToString()}";
+
+                    if (attemptMultiple.optionCorrect1 == true)
+                    {
+                        pnlChoice1.BackColor = Color.YellowGreen; 
+
+                    }
+                    if (attemptMultiple.optionCorrect2 == true)
+                    {
+                        pnlChoice2.BackColor = Color.YellowGreen;
+                            
+                    }
+                    if (attemptMultiple.optionCorrect3 == true)
+                    {
+                        pnlChoice3.BackColor = Color.YellowGreen; 
+                            
+                    }
+                    if (attemptMultiple.optionCorrect4 == true)
+                    {
+                        pnlChoice4.BackColor = Color.YellowGreen;
+                    }
+
+                    if (attemptMultiple.optionSelected1 != attemptMultiple.optionCorrect1 || attemptMultiple.optionSelected2 != attemptMultiple.optionCorrect2 || attemptMultiple.optionSelected3 != attemptMultiple.optionCorrect3 || attemptMultiple.optionSelected4 != attemptMultiple.optionCorrect4)
+                    {
+                        tbxAttemptQuestionPoints.Text = $"0 / {indexedItem.points.ToString()}";
+                        if (attemptMultiple.optionSelected1 == true)
+                        {
+                            pnlChoice1.BackColor = Color.Tomato;
+                        }
+                        if (attemptMultiple.optionSelected2 == true)
+                        {
+                            pnlChoice2.BackColor = Color.Tomato;
+                        }
+                        if (attemptMultiple.optionSelected3 == true)
+                        {
+                            pnlChoice3.BackColor = Color.Tomato;
+                        }
+                        if (attemptMultiple.optionSelected4 == true)
+                        {
+                            pnlChoice4.BackColor = Color.Tomato;
+                        }
+                    }
+                }
+            }
+        }
+
+        public static int computeQuestionScore(XmlElement question)
+        {
+            string questionType = question.GetAttribute("QuestionType");
+            int points = Convert.ToInt32(question.GetAttribute("Points"));
+
+            if (questionType == "Identification")
+            {
+                string myAnswer = question.GetAttribute("InputtedAnswer").ToLower().Trim();
+                string correctAnswer = question.GetAttribute("CorrectAnswer").ToLower().Trim();
+
+                if (myAnswer == correctAnswer)
+                {
+                    return points;
+                }
+            }
+            else if (questionType == "MultipleChoice")
+            {
+                bool choiceCorrect1 = Convert.ToBoolean(question.GetAttribute("ChoiceCorrect1"));
+                bool choiceCorrect2 = Convert.ToBoolean(question.GetAttribute("ChoiceCorrect2"));
+                bool choiceCorrect3 = Convert.ToBoolean(question.GetAttribute("ChoiceCorrect3"));
+                bool choiceCorrect4 = Convert.ToBoolean(question.GetAttribute("ChoiceCorrect4"));
+                bool choiceSelected1 = Convert.ToBoolean(question.GetAttribute("ChoiceSelected1"));
+                bool choiceSelected2 = Convert.ToBoolean(question.GetAttribute("ChoiceSelected2"));
+                bool choiceSelected3 = Convert.ToBoolean(question.GetAttribute("ChoiceSelected3"));
+                bool choiceSelected4 = Convert.ToBoolean(question.GetAttribute("ChoiceSelected4"));
+
+                if (choiceSelected1 == choiceCorrect1 && choiceSelected2 == choiceCorrect2 && choiceSelected3 == choiceCorrect3 && choiceSelected4 == choiceCorrect4)
+                {
+                    return points;
+                }
+
+            }
+            return 0;
+        }
+
+        public static string computeTotalScore(XmlElement attempt)
         {
             int myScore = 0;
             int totalPoints = 0;
 
             foreach (XmlElement question in attempt.ChildNodes)
-            { 
-                string questionType = question.GetAttribute("QuestionType");
-                int points = Convert.ToInt32(question.GetAttribute("Points"));
-                totalPoints += points;
-
-                if (questionType == "Identification")
-                {
-                    string myAnswer = question.GetAttribute("InputtedAnswer").ToLower().Trim();
-                    string correctAnswer = question.GetAttribute("CorrectAnswer").ToLower().Trim();
-
-                    if (myAnswer == correctAnswer)
-                    {
-                        myScore += points;
-                    }
-                }
-                else if (questionType == "MultipleChoice")
-                {
-                    bool choiceCorrect1 = Convert.ToBoolean(question.GetAttribute("ChoiceCorrect1"));
-                    bool choiceCorrect2 = Convert.ToBoolean(question.GetAttribute("ChoiceCorrect2"));
-                    bool choiceCorrect3 = Convert.ToBoolean(question.GetAttribute("ChoiceCorrect3"));
-                    bool choiceCorrect4 = Convert.ToBoolean(question.GetAttribute("ChoiceCorrect4"));
-                    bool choiceSelected1 = Convert.ToBoolean(question.GetAttribute("ChoiceSelected1"));
-                    bool choiceSelected2 = Convert.ToBoolean(question.GetAttribute("ChoiceSelected2"));
-                    bool choiceSelected3 = Convert.ToBoolean(question.GetAttribute("ChoiceSelected3"));
-                    bool choiceSelected4 = Convert.ToBoolean(question.GetAttribute("ChoiceSelected4"));
-
-                    if (choiceSelected1 == choiceCorrect1 && choiceSelected2 == choiceCorrect2 && choiceSelected3 == choiceCorrect3 && choiceSelected4 == choiceCorrect4)
-                    {
-                        myScore += points;
-                    }
-
-                }
+            {
+                totalPoints += Convert.ToInt32(question.GetAttribute("Points"));
+                myScore += computeQuestionScore(question);
             }
-
             return $"{myScore} / {totalPoints}";
         }
+
         public void UpdateAttemptList()
         {
             XmlDocument doc = new();
             doc.Load(pathAttempts);
             XmlElement rootNode = doc.DocumentElement;
-         
+
             lsvAttemptList.Items.Clear();
             lsvAttemptList.Columns.Add("Attempt", 1129, HorizontalAlignment.Center);
             lsvAttemptList.Columns.Add("Score", 350, HorizontalAlignment.Center);
@@ -197,10 +319,8 @@ namespace WizzQuiz
 
             foreach (XmlElement item in rootNode.ChildNodes)
             {
-                // Source: https://www.c-sharpcorner.com/article/various-methods-to-count-occurrences-of-each-number-in-array-or-list/
-
                 string quizName = item.GetAttribute("QuizName");
-                
+
                 if (trackMultipleQuizAttempts.ContainsKey(quizName))
                 {
                     trackMultipleQuizAttempts[quizName]++;
@@ -213,12 +333,12 @@ namespace WizzQuiz
                 }
 
                 ListViewItem attempt = new ListViewItem(quizName + $"    (Attempt #{attemptNumber})");
-                attempt.SubItems.Add(computeScore(item));
+                attempt.SubItems.Add(computeTotalScore(item));
                 lsvAttemptList.Items.Add(attempt);
             }
         }
-        
-        
+
+
         private void WizzQuizForm_Load(object sender, EventArgs e)
         {
             UpdateQuizList();
@@ -318,6 +438,7 @@ namespace WizzQuiz
         private void btnEditQuiz_Click(object sender, EventArgs e)
         {
             int selectedQuizIndex = lbxQuizList.SelectedIndex;
+            editState = true;
 
             if (selectedQuizIndex < 0)
             {
@@ -328,7 +449,6 @@ namespace WizzQuiz
             }
             else
             {
-                editState = true;
                 pnlLibrary.Visible = false;
                 pnlCreate.Visible = true;
 
@@ -1195,13 +1315,14 @@ namespace WizzQuiz
         private void btnViewAttemptFromList_Click(object sender, EventArgs e)
         {
             int selectedAttemptIndex = -1;
+            currentAttemptIndexForViewing = 0;
 
             if (lsvAttemptList.SelectedItems.Count > 0)
             {
-                selectedAttemptIndex= lsvAttemptList.SelectedItems[0].Index;
+                selectedAttemptIndex = lsvAttemptList.SelectedItems[0].Index;
             }
-                
-            
+
+
             if (selectedAttemptIndex < 0)
             {
                 MessageBox.Show("Please select an attempt to view.",
@@ -1211,7 +1332,65 @@ namespace WizzQuiz
             }
             else
             {
+                pnlAttempts.Visible = false;
+                pnlViewAttempt.Visible = true;
 
+                pnlViewAttempt.BringToFront();
+                lbxAttemptQuestionList.Items.Clear();
+                AttemptViewer.Clear();
+
+                XmlDocument doc = new();
+                doc.Load(pathAttempts);
+                XmlElement rootNode = doc.DocumentElement;
+                XmlElement selectedAttempt = (XmlElement)rootNode.ChildNodes[selectedAttemptIndex];
+
+                string attemptName = lsvAttemptList.Items[selectedAttemptIndex].Text;
+                tbxAttemptQuizName.Text = attemptName;
+                int questionNumber = 1;
+
+                foreach (XmlElement item in selectedAttempt.ChildNodes)
+                {
+                    string questionType = item.GetAttribute("QuestionType");
+                    int points = Convert.ToInt32(item.GetAttribute("Points"));
+                    string question = item.GetAttribute("Question");
+
+                    if (questionType == "Identification")
+                    {
+                        
+                        string correctAnswer = item.GetAttribute("CorrectAnswer");
+                        string myAnswer = item.GetAttribute("InputtedAnswer");
+
+                        AnswerIdentification identificationAttempt = new AnswerIdentification(question, points, questionType, correctAnswer);
+                        identificationAttempt.inputtedAnswer = myAnswer;
+                        AttemptViewer.Add(identificationAttempt);
+                    }
+                    else if (questionType == "MultipleChoice")
+                    {
+                        string choiceDesc1 = item.GetAttribute("ChoiceDesc1");
+                        string choiceDesc2 = item.GetAttribute("ChoiceDesc2");
+                        string choiceDesc3 = item.GetAttribute("ChoiceDesc3");
+                        string choiceDesc4 = item.GetAttribute("ChoiceDesc4");
+                        bool choiceCorrect1 = Convert.ToBoolean(item.GetAttribute("ChoiceCorrect1"));
+                        bool choiceCorrect2 = Convert.ToBoolean(item.GetAttribute("ChoiceCorrect2"));
+                        bool choiceCorrect3 = Convert.ToBoolean(item.GetAttribute("ChoiceCorrect3"));
+                        bool choiceCorrect4 = Convert.ToBoolean(item.GetAttribute("ChoiceCorrect4"));
+                        bool choiceSelected1 = Convert.ToBoolean(item.GetAttribute("ChoiceSelected1"));
+                        bool choiceSelected2 = Convert.ToBoolean(item.GetAttribute("ChoiceSelected2"));
+                        bool choiceSelected3 = Convert.ToBoolean(item.GetAttribute("ChoiceSelected3"));
+                        bool choiceSelected4 = Convert.ToBoolean(item.GetAttribute("ChoiceSelected4"));
+
+                        AnswerMultipleChoice multiplechoiceAttempt = new AnswerMultipleChoice(question, points, questionType, choiceDesc1, choiceDesc2, choiceDesc3, choiceDesc4, choiceCorrect1, choiceCorrect2, choiceCorrect3, choiceCorrect4);
+                        multiplechoiceAttempt.optionSelected1 = choiceSelected1;
+                        multiplechoiceAttempt.optionSelected2 = choiceSelected2;
+                        multiplechoiceAttempt.optionSelected3 = choiceSelected3;
+                        multiplechoiceAttempt.optionSelected4 = choiceSelected4;
+
+                        AttemptViewer.Add(multiplechoiceAttempt);
+                    }
+                    lbxAttemptQuestionList.Items.Add($"Question {questionNumber}");
+                    questionNumber++;
+                }
+                ViewQuestionIndexForViewingAttempts(currentAttemptIndexForViewing);
             }
         }
 
@@ -1229,6 +1408,58 @@ namespace WizzQuiz
         }
 
         private void pnlAttempts_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        // VIEW ATTEMPT PAGE
+        private void btnBackToAttemptList_Click(object sender, EventArgs e)
+        {
+            pnlViewAttempt.Visible = false;
+            pnlAttempts.Visible = true;
+            pnlAttempts.BringToFront();
+        }
+
+        private void lbxAttemptQuestionList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnViewAttemptJumpTo_Click(object sender, EventArgs e)
+        {
+            int selectedQuestionIndex = lbxAttemptQuestionList.SelectedIndex;
+
+            if (selectedQuestionIndex < 0)
+            {
+                MessageBox.Show("Please select a question.", "No Question Selected", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                int selectedIndex = lbxAttemptQuestionList.SelectedIndex;
+                ViewQuestionIndexForViewingAttempts(selectedIndex);
+                currentAttemptIndexForViewing = selectedIndex;
+            }
+        }
+
+        private void btnAttemptNext_Click(object sender, EventArgs e)
+        {
+            if (currentAttemptIndexForViewing < AttemptViewer.Count())
+            {
+                currentAttemptIndexForViewing++;
+                ViewQuestionIndexForViewingAttempts(currentAttemptIndexForViewing);
+            }
+        }
+
+        private void btnAttemptPrev_Click(object sender, EventArgs e)
+        {
+            if (currentAttemptIndexForViewing > 0)
+            {
+                currentAttemptIndexForViewing--;
+                ViewQuestionIndexForViewingAttempts(currentAttemptIndexForViewing);
+            }
+        }
+
+        private void tbxAttemptAnswerIdentification_TextChanged(object sender, EventArgs e)
         {
 
         }

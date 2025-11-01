@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Main",
+    "\\Main\\WizzQuiz",
+    "\\Main\\WizzQuiz\\WizzQuiz"
   ],
-  "SelectedNode": "\\WizzQuiz.sln",
+  "SelectedNode": "\\Main\\WizzQuiz\\WizzQuiz\\Form1.cs",
   "PreviewInSolutionExplorer": false
 }

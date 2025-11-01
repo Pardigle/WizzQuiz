@@ -14,4 +14,7 @@
     <QuizItem Question="What is the rank of the matrix below? &#xD;&#xA;| 2  3  -1 |&#xD;&#xA;| 0  1   4 |&#xD;&#xA;| 0  0   0 |&#xD;&#xA;(Hint: rank = maximum no. of linearly independent vectors)" Points="2" QuestionType="MultipleChoice" ChoiceDesc1="0" ChoiceDesc2="1" ChoiceDesc3="2" ChoiceDesc4="3" ChoiceCorrect1="False" ChoiceCorrect2="False" ChoiceCorrect3="True" ChoiceCorrect4="False" />
     <QuizItem Question="What is the real number solution of the equation x = 2x?" Points="2" QuestionType="Identification" CorrectAnswer="0" />
   </Quiz>
+  <Quiz QuizName="Alphabet">
+    <QuizItem Question="What letter is right after A" Points="1" QuestionType="MultipleChoice" ChoiceDesc1="B" ChoiceDesc2="C" ChoiceDesc3="D" ChoiceDesc4="E" ChoiceCorrect1="True" ChoiceCorrect2="False" ChoiceCorrect3="False" ChoiceCorrect4="False" />
+  </Quiz>
 </QuizList>
