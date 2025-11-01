@@ -15,9 +15,10 @@ namespace WizzQuiz
         List<QuizItem> QuizAttempt = new List<QuizItem>();
         String QuizAnsweredName = "";
         int currentAttemptIndex = 0;
-        //String path = "C:/Users/beaZ13/SynologyDrive/School/Y3S1_files/msys(dsa)_files/dsa_proj/WizzQuiz/Main/WizzQuiz/WizzQuiz/Quizzes.xml";
-        String path = "C:/Users/Mikey/Source/Repos/WizzQuiz/Main/WizzQuiz/WizzQuiz/Quizzes.xml";
-        String pathAttempts = "C:/Users/Mikey/Source/Repos/WizzQuiz/Main/WizzQuiz/WizzQuiz/Attempts.xml";
+        String path = "C:/Users/beaZ13/SynologyDrive/School/Y3S1_files/msys(dsa)_files/dsa_proj/WizzQuiz/Main/WizzQuiz/WizzQuiz/Quizzes.xml";
+        String pathAttempts = "C:/Users/beaZ13/SynologyDrive/School/Y3S1_files/msys(dsa)_files/dsa_proj/WizzQuiz/Main/WizzQuiz/WizzQuiz/Attempts.xml";
+        //String path = "C:/Users/Mikey/Source/Repos/WizzQuiz/Main/WizzQuiz/WizzQuiz/Quizzes.xml";
+        //String pathAttempts = "C:/Users/Mikey/Source/Repos/WizzQuiz/Main/WizzQuiz/WizzQuiz/Attempts.xml";
 
         bool editState = false; // checks whether user is currently editing a quiz
 
@@ -139,6 +140,42 @@ namespace WizzQuiz
                 }
             }
         }
+        public void UpdateAttemptList()
+        {
+            XmlDocument doc = new();
+            doc.Load(pathAttempts);
+            XmlElement rootNode = doc.DocumentElement;
+         
+            lsvAttemptList.Items.Clear();
+            lsvAttemptList.Columns.Add("Attempt", 1129, HorizontalAlignment.Center);
+            lsvAttemptList.Columns.Add("Score", 350, HorizontalAlignment.Center);
+
+            Dictionary<string, int> trackMultipleQuizAttempts = new Dictionary<string, int>();
+            int attemptNumber = 1;
+
+            foreach (XmlElement item in rootNode.ChildNodes)
+            {
+                // Source: https://www.c-sharpcorner.com/article/various-methods-to-count-occurrences-of-each-number-in-array-or-list/
+
+                string quizName = item.GetAttribute("QuizName");
+                
+                if (trackMultipleQuizAttempts.ContainsKey(quizName))
+                {
+                    trackMultipleQuizAttempts[quizName]++;
+                    attemptNumber = trackMultipleQuizAttempts[quizName];
+                }
+                else
+                {
+                    trackMultipleQuizAttempts[quizName] = 1;
+                    attemptNumber = 1;
+                }
+
+                ListViewItem attempt = new ListViewItem(quizName + $"    (Attempt #{attemptNumber})");
+                attempt.SubItems.Add("score placeholder");
+                lsvAttemptList.Items.Add(attempt);
+            }
+        }
+        
         private void WizzQuizForm_Load(object sender, EventArgs e)
         {
             UpdateQuizList();
@@ -162,7 +199,10 @@ namespace WizzQuiz
 
         private void btnViewAttempts_Click(object sender, EventArgs e)
         {
-
+            pnlLibrary.Visible = false;
+            pnlAttempts.Visible = true;
+            UpdateAttemptList();
+            pnlAttempts.BringToFront();
         }
 
         private void btnAnswerQuiz_Click(object sender, EventArgs e)
@@ -829,8 +869,9 @@ namespace WizzQuiz
 
             if (selectedQuestionIndex < 0)
             {
-                MessageBox.Show("Please select a question.","No Question Selected", MessageBoxButtons.OK,MessageBoxIcon.Warning);
-            } else
+                MessageBox.Show("Please select a question.", "No Question Selected", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
             {
                 int selectedIndex = lbxAnswerQuestionList.SelectedIndex;
                 ViewQuestionIndex(selectedIndex);
@@ -850,7 +891,7 @@ namespace WizzQuiz
                     {
                         validSubmission = false;
                     }
-                } 
+                }
                 else
                 {
                     AnswerIdentification identificationItem = (AnswerIdentification)attemptItem;
@@ -1100,6 +1141,47 @@ namespace WizzQuiz
         }
 
         private void tbxAnswerQuizName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnViewAttemptFromList_Click(object sender, EventArgs e)
+        {
+            int selectedAttemptIndex = -1;
+
+            if (lsvAttemptList.SelectedItems.Count > 0)
+            {
+                selectedAttemptIndex= lsvAttemptList.SelectedItems[0].Index;
+            }
+                
+            
+            if (selectedAttemptIndex < 0)
+            {
+                MessageBox.Show("Please select an attempt to view.",
+                    "No Attempt Selected",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+            }
+            else
+            {
+
+            }
+        }
+
+        private void btnBackToLibraryAttempts_Click(object sender, EventArgs e)
+        {
+            pnlAttempts.Visible = false;
+            pnlLibrary.Visible = true;
+            pnlLibrary.BringToFront();
+        }
+
+
+        private void lbxAttemptList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pnlAttempts_Paint(object sender, PaintEventArgs e)
         {
 
         }
