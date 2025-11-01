@@ -15,10 +15,10 @@ namespace WizzQuiz
         List<QuizItem> QuizAttempt = new List<QuizItem>();
         String QuizAnsweredName = "";
         int currentAttemptIndex = 0;
-        String path = "C:/Users/beaZ13/SynologyDrive/School/Y3S1_files/msys(dsa)_files/dsa_proj/WizzQuiz/Main/WizzQuiz/WizzQuiz/Quizzes.xml";
-        String pathAttempts = "C:/Users/beaZ13/SynologyDrive/School/Y3S1_files/msys(dsa)_files/dsa_proj/WizzQuiz/Main/WizzQuiz/WizzQuiz/Attempts.xml";
-        //String path = "C:/Users/Mikey/Source/Repos/WizzQuiz/Main/WizzQuiz/WizzQuiz/Quizzes.xml";
-        //String pathAttempts = "C:/Users/Mikey/Source/Repos/WizzQuiz/Main/WizzQuiz/WizzQuiz/Attempts.xml";
+        //String path = "C:/Users/beaZ13/SynologyDrive/School/Y3S1_files/msys(dsa)_files/dsa_proj/WizzQuiz/Main/WizzQuiz/WizzQuiz/Quizzes.xml";
+        //String pathAttempts = "C:/Users/beaZ13/SynologyDrive/School/Y3S1_files/msys(dsa)_files/dsa_proj/WizzQuiz/Main/WizzQuiz/WizzQuiz/Attempts.xml";
+        String path = "C:/Users/Mikey/Source/Repos/WizzQuiz/Main/WizzQuiz/WizzQuiz/Quizzes.xml";
+        String pathAttempts = "C:/Users/Mikey/Source/Repos/WizzQuiz/Main/WizzQuiz/WizzQuiz/Attempts.xml";
 
         bool editState = false; // checks whether user is currently editing a quiz
 
@@ -318,7 +318,6 @@ namespace WizzQuiz
         private void btnEditQuiz_Click(object sender, EventArgs e)
         {
             int selectedQuizIndex = lbxQuizList.SelectedIndex;
-            editState = true;
 
             if (selectedQuizIndex < 0)
             {
@@ -329,6 +328,7 @@ namespace WizzQuiz
             }
             else
             {
+                editState = true;
                 pnlLibrary.Visible = false;
                 pnlCreate.Visible = true;
 
