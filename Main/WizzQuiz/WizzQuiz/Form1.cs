@@ -312,8 +312,8 @@ namespace WizzQuiz
             XmlElement rootNode = doc.DocumentElement;
 
             lsvAttemptList.Items.Clear();
-            lsvAttemptList.Columns.Add("Attempt", 1129, HorizontalAlignment.Center);
-            lsvAttemptList.Columns.Add("Score", 350, HorizontalAlignment.Center);
+            lsvAttemptList.Columns.Add("Attempt", 764, HorizontalAlignment.Center);
+            lsvAttemptList.Columns.Add("Score", 150, HorizontalAlignment.Center);
 
             Dictionary<string, int> trackMultipleQuizAttempts = new Dictionary<string, int>();
             int attemptNumber = 1;
