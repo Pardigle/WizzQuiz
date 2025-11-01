@@ -12,6 +12,12 @@ namespace WizzQuiz
 {
     public partial class WizzQuizForm : Form
     {
+        // XML PATHS. There are two, Quizzes.xml and Attempts.xml
+        //String path = "C:/Users/beaZ13/SynologyDrive/School/Y3S1_files/msys(dsa)_files/dsa_proj/WizzQuiz/Main/WizzQuiz/WizzQuiz/Quizzes.xml";
+        //String pathAttempts = "C:/Users/beaZ13/SynologyDrive/School/Y3S1_files/msys(dsa)_files/dsa_proj/WizzQuiz/Main/WizzQuiz/WizzQuiz/Attempts.xml";
+        String path = "C:/Users/Mikey/Source/Repos/WizzQuiz/Main/WizzQuiz/WizzQuiz/Quizzes.xml";
+        String pathAttempts = "C:/Users/Mikey/Source/Repos/WizzQuiz/Main/WizzQuiz/WizzQuiz/Attempts.xml";
+
         List<QuizItem> Quiz = new List<QuizItem>();
         List<QuizItem> QuizAttempt = new List<QuizItem>();
         List<QuizItem> AttemptViewer = new List<QuizItem>();
@@ -19,11 +25,6 @@ namespace WizzQuiz
         String QuizAnsweredName = "";
         int currentAttemptIndex = 0;
         int currentAttemptIndexForViewing = 0;
-
-        //String path = "C:/Users/beaZ13/SynologyDrive/School/Y3S1_files/msys(dsa)_files/dsa_proj/WizzQuiz/Main/WizzQuiz/WizzQuiz/Quizzes.xml";
-        //String pathAttempts = "C:/Users/beaZ13/SynologyDrive/School/Y3S1_files/msys(dsa)_files/dsa_proj/WizzQuiz/Main/WizzQuiz/WizzQuiz/Attempts.xml";
-        String path = "C:/Users/Mikey/Source/Repos/WizzQuiz/Main/WizzQuiz/WizzQuiz/Quizzes.xml";
-        String pathAttempts = "C:/Users/Mikey/Source/Repos/WizzQuiz/Main/WizzQuiz/WizzQuiz/Attempts.xml";
 
         bool editState = false; // checks whether user is currently editing a quiz
 
