@@ -186,7 +186,7 @@ namespace WizzQuiz
                     tbxUserAnswerIdentification.BackColor = Color.YellowGreen;
                     tbxAttemptQuestionPoints.Text = $"{indexedItem.points.ToString()} / {indexedItem.points.ToString()}";
 
-                    if (attemptIdentification.correctAnswer != attemptIdentification.inputtedAnswer)
+                    if (attemptIdentification.correctAnswer.ToLower().Trim() != attemptIdentification.inputtedAnswer.ToLower().Trim())
                     {
                         tbxAttemptQuestionPoints.Text = $"0 / {indexedItem.points.ToString()}";
                         tbxUserAnswerIdentification.BackColor = Color.Tomato;
@@ -1357,8 +1357,8 @@ namespace WizzQuiz
                     if (questionType == "Identification")
                     {
                         
-                        string correctAnswer = item.GetAttribute("CorrectAnswer").ToLower().Trim();
-                        string myAnswer = item.GetAttribute("InputtedAnswer").ToLower().Trim();
+                        string correctAnswer = item.GetAttribute("CorrectAnswer");
+                        string myAnswer = item.GetAttribute("InputtedAnswer");
 
                         AnswerIdentification identificationAttempt = new AnswerIdentification(question, points, questionType, correctAnswer);
                         identificationAttempt.inputtedAnswer = myAnswer;
