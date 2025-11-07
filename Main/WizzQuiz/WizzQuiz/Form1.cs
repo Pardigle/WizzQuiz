@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.DirectoryServices.ActiveDirectory;
 using System.IO;
 using System.Reflection.Metadata;
 using System.Security.Cryptography;
@@ -593,6 +594,10 @@ namespace WizzQuiz
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            XmlDocument doc = new();
+            doc.Load(path);
+            XmlElement rootNode = doc.DocumentElement;
+
             if (Quiz.Count < 1)
             {
                 MessageBox.Show("Add at least one question to be able to save.",
@@ -611,6 +616,29 @@ namespace WizzQuiz
                         MessageBoxIcon.Warning);
                     return;
                 }
+
+                bool quizNameExists = false;
+                foreach (XmlNode node in rootNode.ChildNodes)
+                {
+                    XmlElement existingQuiz = (XmlElement)node;
+                    string existingTitle = existingQuiz.GetAttribute("QuizName");
+
+                    if (existingTitle == tbxQuizName.Text)
+                    {
+                        quizNameExists = true;
+                        break;
+                    }
+
+                }
+                if (quizNameExists == true) 
+                {
+                    MessageBox.Show("A Quiz with that title already exists",
+                        "Enter a Unique Title",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
+                    return;
+                }
+
                 foreach (QuizItem item in Quiz)
                 {
                     if (string.IsNullOrWhiteSpace(item.question))
@@ -663,10 +691,6 @@ namespace WizzQuiz
                     }
                 }
             }
-
-            XmlDocument doc = new();
-            doc.Load(path);
-            XmlElement rootNode = doc.DocumentElement;
 
             //Create Quiz Element
             XmlElement quiz = doc.CreateElement("Quiz");

@@ -58,4 +58,7 @@
     <AttemptItem Question="What letter is right after A" Points="1" QuestionType="MultipleChoice" ChoiceDesc1="B" ChoiceDesc2="C" ChoiceDesc3="D" ChoiceDesc4="E" ChoiceCorrect1="True" ChoiceCorrect2="False" ChoiceCorrect3="False" ChoiceCorrect4="False" ChoiceSelected1="False" ChoiceSelected2="True" ChoiceSelected3="False" ChoiceSelected4="True" />
     <AttemptItem Question="What letter comes right before X?" Points="1" QuestionType="Identification" CorrectAnswer="W" InputtedAnswer="W" />
   </Attempt>
+  <Attempt QuizName="Basic Math 2">
+    <AttemptItem Question="3+3 = ?" Points="1" QuestionType="Identification" CorrectAnswer="6" InputtedAnswer="2" />
+  </Attempt>
 </AttemptList>
