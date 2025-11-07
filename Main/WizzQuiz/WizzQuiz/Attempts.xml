@@ -50,4 +50,12 @@
     <AttemptItem Question="What is the rank of the matrix below? &#xD;&#xA;| 2  3  -1 |&#xD;&#xA;| 0  1   4 |&#xD;&#xA;| 0  0   0 |&#xD;&#xA;(Hint: rank = maximum no. of linearly independent vectors)" Points="2" QuestionType="MultipleChoice" ChoiceDesc1="0" ChoiceDesc2="1" ChoiceDesc3="2" ChoiceDesc4="3" ChoiceCorrect1="False" ChoiceCorrect2="False" ChoiceCorrect3="True" ChoiceCorrect4="False" ChoiceSelected1="False" ChoiceSelected2="False" ChoiceSelected3="True" ChoiceSelected4="False" />
     <AttemptItem Question="What is the real number solution of the equation x = 2x?" Points="2" QuestionType="Identification" CorrectAnswer="0" InputtedAnswer="0" />
   </Attempt>
+  <Attempt QuizName="Genshin Impact Quiz">
+    <AttemptItem Question="What was the name of the first nation introduced to the player?" Points="1" QuestionType="Identification" CorrectAnswer="Mondstadt" InputtedAnswer="jjj" />
+    <AttemptItem Question="Who is the traveller's companion?" Points="1" QuestionType="MultipleChoice" ChoiceDesc1="Kamisato Ayaka" ChoiceDesc2="Tartaglia" ChoiceDesc3="Raiden Shogun" ChoiceDesc4="Paimon" ChoiceCorrect1="False" ChoiceCorrect2="False" ChoiceCorrect3="False" ChoiceCorrect4="True" ChoiceSelected1="True" ChoiceSelected2="True" ChoiceSelected3="True" ChoiceSelected4="True" />
+  </Attempt>
+  <Attempt QuizName="Alphabet">
+    <AttemptItem Question="What letter is right after A" Points="1" QuestionType="MultipleChoice" ChoiceDesc1="B" ChoiceDesc2="C" ChoiceDesc3="D" ChoiceDesc4="E" ChoiceCorrect1="True" ChoiceCorrect2="False" ChoiceCorrect3="False" ChoiceCorrect4="False" ChoiceSelected1="False" ChoiceSelected2="True" ChoiceSelected3="False" ChoiceSelected4="True" />
+    <AttemptItem Question="What letter comes right before X?" Points="1" QuestionType="Identification" CorrectAnswer="W" InputtedAnswer="W" />
+  </Attempt>
 </AttemptList>

@@ -13,10 +13,10 @@ namespace WizzQuiz
     public partial class WizzQuizForm : Form
     {
         // XML PATHS. There are two, Quizzes.xml and Attempts.xml
-        //String path = "C:/Users/beaZ13/SynologyDrive/School/Y3S1_files/msys(dsa)_files/dsa_proj/WizzQuiz/Main/WizzQuiz/WizzQuiz/Quizzes.xml";
-        //String pathAttempts = "C:/Users/beaZ13/SynologyDrive/School/Y3S1_files/msys(dsa)_files/dsa_proj/WizzQuiz/Main/WizzQuiz/WizzQuiz/Attempts.xml";
-        String path = "C:/Users/Mikey/Source/Repos/WizzQuiz/Main/WizzQuiz/WizzQuiz/Quizzes.xml";
-        String pathAttempts = "C:/Users/Mikey/Source/Repos/WizzQuiz/Main/WizzQuiz/WizzQuiz/Attempts.xml";
+        String path = "C:/Users/beaZ13/SynologyDrive/School/Y3S1_files/msys(dsa)_files/dsa_proj/WizzQuiz/Main/WizzQuiz/WizzQuiz/Quizzes.xml";
+        String pathAttempts = "C:/Users/beaZ13/SynologyDrive/School/Y3S1_files/msys(dsa)_files/dsa_proj/WizzQuiz/Main/WizzQuiz/WizzQuiz/Attempts.xml";
+        // String path = "C:/Users/Mikey/Source/Repos/WizzQuiz/Main/WizzQuiz/WizzQuiz/Quizzes.xml";
+        // String pathAttempts = "C:/Users/Mikey/Source/Repos/WizzQuiz/Main/WizzQuiz/WizzQuiz/Attempts.xml";
 
         List<QuizItem> Quiz = new List<QuizItem>();
         List<QuizItem> QuizAttempt = new List<QuizItem>();
@@ -233,21 +233,36 @@ namespace WizzQuiz
                         pnlChoice4.BackColor = Color.YellowGreen;
                     }
 
-                    if (attemptMultiple.optionSelected1 != attemptMultiple.optionCorrect1 || attemptMultiple.optionSelected2 != attemptMultiple.optionCorrect2 || attemptMultiple.optionSelected3 != attemptMultiple.optionCorrect3 || attemptMultiple.optionSelected4 != attemptMultiple.optionCorrect4)
+                    if (attemptMultiple.optionSelected1 != attemptMultiple.optionCorrect1) 
                     {
                         tbxAttemptQuestionPoints.Text = $"0 / {indexedItem.points.ToString()}";
                         if (attemptMultiple.optionSelected1 == true)
                         {
                             pnlChoice1.BackColor = Color.Tomato;
                         }
+                    }
+
+                    if (attemptMultiple.optionSelected2 != attemptMultiple.optionCorrect2)
+                    {
+                        tbxAttemptQuestionPoints.Text = $"0 / {indexedItem.points.ToString()}";
                         if (attemptMultiple.optionSelected2 == true)
                         {
                             pnlChoice2.BackColor = Color.Tomato;
                         }
+                    }
+
+                    if (attemptMultiple.optionSelected3 != attemptMultiple.optionCorrect3)
+                    {
+                        tbxAttemptQuestionPoints.Text = $"0 / {indexedItem.points.ToString()}";
                         if (attemptMultiple.optionSelected3 == true)
                         {
                             pnlChoice3.BackColor = Color.Tomato;
                         }
+                    }
+
+                    if (attemptMultiple.optionSelected4 != attemptMultiple.optionCorrect4)
+                    {
+                        tbxAttemptQuestionPoints.Text = $"0 / {indexedItem.points.ToString()}";
                         if (attemptMultiple.optionSelected4 == true)
                         {
                             pnlChoice4.BackColor = Color.Tomato;

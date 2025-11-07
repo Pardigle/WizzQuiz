@@ -1013,7 +1013,7 @@
             // 
             // pnlChoice2
             // 
-            pnlChoice2.Location = new Point(15, 81);
+            pnlChoice2.Location = new Point(15, 79);
             pnlChoice2.Margin = new Padding(2);
             pnlChoice2.Name = "pnlChoice2";
             pnlChoice2.Size = new Size(24, 24);
@@ -1030,7 +1030,7 @@
             // 
             // pnlChoice1
             // 
-            pnlChoice1.Location = new Point(17, 45);
+            pnlChoice1.Location = new Point(15, 45);
             pnlChoice1.Margin = new Padding(2);
             pnlChoice1.Name = "pnlChoice1";
             pnlChoice1.Size = new Size(24, 24);
